@@ -141,6 +141,14 @@ const Navigation = () => {
             </li>
             <li>
               <Link
+                to="/work-out-now"
+                className={`${getTitleColor()} block py-2 px-3 md:p-0`}
+              >
+               Start
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/about"
                 className={`${getTitleColor()} block py-2 px-3 md:p-0`}
               >
@@ -150,10 +158,10 @@ const Navigation = () => {
 
             <li>
               <Link
-                to="/login"
+                to="/download"
                 className={`${getTitleColor()} block py-2 px-3 md:p-0`}
               >
-                Login
+                Download
               </Link>
             </li>
           </ul>
