@@ -56,7 +56,7 @@ function About() {
         {/* Call-to-Action */}
         <div className="mt-12">
           <a
-            href="/login"
+            href="#"
             className="bg-green-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-green-500 transition"
           >
             Get Started Today

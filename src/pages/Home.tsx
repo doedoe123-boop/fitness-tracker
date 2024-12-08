@@ -13,7 +13,7 @@ function Home() {
           Start your journey toward a healthier and happier life today.
         </p>
         <a
-          href="/login"
+          href="#"
           className="bg-white text-green-500 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:bg-green-100 transition ease-in-out duration-300 z-10"
         >
           Get Started
@@ -105,7 +105,7 @@ function Home() {
             Begin your fitness journey today and transform your lifestyle.
           </p>
           <a
-            href="/login"
+            href="#"
             className="bg-white text-green-500 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:bg-green-100 transition ease-in-out duration-300"
           >
             Get Started
