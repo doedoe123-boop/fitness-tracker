@@ -5,7 +5,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import { useEffect } from "react";
-import Navitation from "./pages/components/layouts/Navigation";
 import HealthImportance from "./pages/HealthImportance";
 import Footer from "./pages/components/layouts/Footer";
 import FitnessTips from "./pages/FitnessTips";
