@@ -48,7 +48,7 @@ function App() {
         <DynamicTitle />
 
         {/* Navigation */}
-        <Navitation />
+        {/* <Navitation /> */}
 
         <Routes>
           <Route path="/" element={<Home />} />

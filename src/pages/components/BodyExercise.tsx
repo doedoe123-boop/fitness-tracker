@@ -43,7 +43,17 @@ const BodyExercise: React.FC = () => {
   };
 
   return (
-    <div className="p-6 font-sans">
+    <div className="p-6 font-sans bg-[#2b1821] text-white min-h-screen">
+      {/* Title Section */}
+      <motion.h1
+        className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        Exercise Categories
+      </motion.h1>
+
       {/* Display Exercise Categories */}
       <div className="space-y-8">
         {exerciseCategories.map((category, index) => (
@@ -60,19 +70,21 @@ const BodyExercise: React.FC = () => {
               },
             }}
           >
-            <h2 className="text-2xl font-bold mb-4">{category.category}</h2>
+            <h2 className="text-2xl font-bold mb-4 text-pink-400">
+              {category.category}
+            </h2>
             <div className="flex flex-wrap gap-4">
               {category.exercises.map((exercise, idx) => (
                 <motion.div
                   key={idx}
-                  className="exercise-item bg-gray-100 p-4 rounded-lg shadow-lg hover:bg-gray-200 cursor-pointer transition"
+                  className="exercise-item bg-[#3a222d] p-4 rounded-lg shadow-lg hover:shadow-xl cursor-pointer transition-all duration-300 hover:scale-105"
                   variants={{
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0 },
                   }}
                   onClick={() => handleExerciseClick(exercise)}
                 >
-                  {exercise}
+                  <span className="text-lg font-semibold">{exercise}</span>
                 </motion.div>
               ))}
             </div>
@@ -82,17 +94,24 @@ const BodyExercise: React.FC = () => {
 
       {/* Display Selected Exercise */}
       {selectedExercise && (
-        <div className="mt-10 text-center">
+        <motion.div
+          className="mt-10 text-center"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <h3 className="text-xl font-semibold mb-4">
             You selected:{" "}
-            <span className="text-blue-500">{selectedExercise}</span>
+            <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+              {selectedExercise}
+            </span>
           </h3>
           <div className="flex justify-center items-center">
             {exerciseMedia[selectedExercise] ? (
               <motion.img
                 src={exerciseMedia[selectedExercise]}
                 alt={selectedExercise}
-                className="h-auto w-80"
+                className="h-auto w-80 rounded-lg shadow-2xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
@@ -101,13 +120,13 @@ const BodyExercise: React.FC = () => {
               <div className="text-gray-500">No media available</div>
             )}
           </div>
-        </div>
+        </motion.div>
       )}
 
       {/* Display Popping Text */}
       {poppingText && (
         <motion.div
-          className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg"
+          className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-600 to-purple-700 text-white px-6 py-3 rounded-lg shadow-lg"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
@@ -116,6 +135,19 @@ const BodyExercise: React.FC = () => {
           {poppingText}
         </motion.div>
       )}
+
+      {/* Additional Content: Motivational Quote */}
+      <motion.div
+        className="mt-12 text-center"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <p className="text-lg text-gray-300">
+          "The body achieves what the mind believes. Keep pushing, and you'll
+          reach your goals!"
+        </p>
+      </motion.div>
     </div>
   );
 };
