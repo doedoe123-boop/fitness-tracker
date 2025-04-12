@@ -1,148 +1,158 @@
 import { motion } from "framer-motion";
+import { FaHeart, FaBrain, FaRunning, FaBed, FaAppleAlt, FaSmile } from "react-icons/fa";
 
 const HealthImportance = () => {
   return (
-    <div className="min-h-screen bg-[#2b1821] text-white p-6">
-      <div className="container mx-auto max-w-4xl text-center">
-        {/* Title Section */}
-        <motion.h1
-          className="text-5xl font-extrabold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-6"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          The Importance of Health
-        </motion.h1>
-        <motion.p
-          className="text-xl text-gray-300 leading-relaxed mb-8"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Your health is your most valuable asset. It affects your energy, mood,
-          productivity, and quality of life. By maintaining good health, you can
-          prevent chronic diseases, improve mental well-being, and live life to
-          its fullest.
-        </motion.p>
+    <div className="min-h-screen bg-white text-slate-800">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70 py-16">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.p
+            className="text-lg font-medium tracking-wide text-teal-700 uppercase mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Health & Wellness
+          </motion.p>
+          <motion.h1
+            className="text-4xl md:text-5xl font-bold mb-6 text-slate-900"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            The Importance of <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Health</span>
+          </motion.h1>
+          <motion.p
+            className="text-lg text-slate-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Discover why maintaining good health is crucial for a fulfilling and productive life
+          </motion.p>
+        </div>
+      </section>
 
-        {/* Why Focus on Health Section */}
-        <motion.div
-          className="bg-[#3a222d] rounded-lg shadow-lg p-8 mb-8"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
-            Why Focus on Health?
-          </h2>
-          <ul className="list-disc list-inside text-left text-gray-300 text-lg leading-relaxed">
-            <li className="mb-2">
-              <strong className="text-pink-400">Prevent Illnesses:</strong>{" "}
-              Avoid chronic conditions such as diabetes, heart disease, and
-              obesity.
-            </li>
-            <li className="mb-2">
-              <strong className="text-pink-400">Boost Energy Levels:</strong>{" "}
-              Feel more energetic and ready to tackle your daily tasks.
-            </li>
-            <li className="mb-2">
-              <strong className="text-pink-400">Enhance Mental Clarity:</strong>{" "}
-              Reduce stress and improve your focus and overall well-being.
-            </li>
-            <li>
-              <strong className="text-pink-400">Increase Longevity:</strong>{" "}
-              Enjoy a longer, healthier, and more fulfilling life.
-            </li>
-          </ul>
-        </motion.div>
+      {/* Benefits Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <motion.div
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl font-bold mb-6 text-slate-900">Key Benefits of Good Health</h2>
+            <p className="text-lg text-slate-600">
+              Investing in your health today leads to numerous benefits that enhance your quality of life
+            </p>
+          </motion.div>
 
-        {/* How to Improve Health Section */}
-        <motion.div
-          className="bg-[#3a222d] rounded-lg shadow-lg p-8"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
-            How to Improve Your Health?
-          </h2>
-          <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            Achieving good health doesn’t have to be overwhelming. Start with
-            small, consistent habits that lead to big changes over time.
-          </p>
-          <ul className="list-none grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.li
-              className="flex items-center space-x-4"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <div className="bg-pink-500 text-white w-12 h-12 flex justify-center items-center rounded-full">
-                🏃‍♂️
-              </div>
-              <p className="text-gray-300">
-                <strong className="text-pink-400">Stay Active:</strong> Aim for
-                at least 30 minutes of physical activity daily.
-              </p>
-            </motion.li>
-            <motion.li
-              className="flex items-center space-x-4"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <div className="bg-pink-500 text-white w-12 h-12 flex justify-center items-center rounded-full">
-                🍎
-              </div>
-              <p className="text-gray-300">
-                <strong className="text-pink-400">Eat Right:</strong> Maintain
-                a balanced diet rich in whole foods, fruits, and vegetables.
-              </p>
-            </motion.li>
-            <motion.li
-              className="flex items-center space-x-4"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <div className="bg-pink-500 text-white w-12 h-12 flex justify-center items-center rounded-full">
-                🛌
-              </div>
-              <p className="text-gray-300">
-                <strong className="text-pink-400">Sleep Well:</strong> Get 7–9
-                hours of quality sleep each night.
-              </p>
-            </motion.li>
-            <motion.li
-              className="flex items-center space-x-4"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <div className="bg-pink-500 text-white w-12 h-12 flex justify-center items-center rounded-full">
-                🧘‍♀️
-              </div>
-              <p className="text-gray-300">
-                <strong className="text-pink-400">Manage Stress:</strong>{" "}
-                Practice mindfulness and relaxation techniques regularly.
-              </p>
-            </motion.li>
-          </ul>
-        </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <FaHeart className="text-4xl text-rose-600" />,
+                title: "Physical Well-being",
+                description: "Maintain optimal body function and prevent chronic diseases through regular exercise and proper nutrition"
+              },
+              {
+                icon: <FaBrain className="text-4xl text-purple-600" />,
+                title: "Mental Clarity",
+                description: "Experience improved focus, reduced stress, and better cognitive performance"
+              },
+              {
+                icon: <FaRunning className="text-4xl text-emerald-600" />,
+                title: "Energy Boost",
+                description: "Enjoy increased vitality and stamina throughout your daily activities"
+              },
+              {
+                icon: <FaBed className="text-4xl text-sky-600" />,
+                title: "Better Sleep",
+                description: "Achieve quality rest and improved sleep patterns for better recovery"
+              },
+              {
+                icon: <FaAppleAlt className="text-4xl text-red-600" />,
+                title: "Disease Prevention",
+                description: "Strengthen your immune system and reduce the risk of various health conditions"
+              },
+              {
+                icon: <FaSmile className="text-4xl text-amber-600" />,
+                title: "Emotional Balance",
+                description: "Foster positive mood and better emotional resilience through healthy lifestyle choices"
+              }
+            ].map((benefit, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex justify-center mb-6">{benefit.icon}</div>
+                <h3 className="text-xl font-semibold mb-4 text-center text-slate-900">{benefit.title}</h3>
+                <p className="text-slate-600 text-center">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* Motivational Call-to-Action */}
-        <motion.div
-          className="mt-12"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-        >
-          <p className="text-xl font-semibold text-gray-300">
-            Start your journey to better health today. Make small changes, and
-            watch your life transform!
-          </p>
-        </motion.div>
-      </div>
+      {/* Action Steps Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <motion.div
+            className="bg-white p-12 rounded-2xl shadow-xl relative overflow-hidden"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-transparent opacity-50" />
+            <div className="relative z-10">
+              <h2 className="text-3xl font-bold mb-8 text-center text-slate-900">Take Action Today</h2>
+              <div className="space-y-6 max-w-3xl mx-auto">
+                <p className="text-lg text-slate-600 text-center mb-8">
+                  Start your journey to better health with these simple but effective steps:
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-slate-900">Daily Habits</h3>
+                    <ul className="list-disc list-inside text-slate-600 space-y-2">
+                      <li>30 minutes of physical activity</li>
+                      <li>8 hours of quality sleep</li>
+                      <li>Balanced, nutritious meals</li>
+                      <li>Proper hydration</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-slate-900">Mental Wellness</h3>
+                    <ul className="list-disc list-inside text-slate-600 space-y-2">
+                      <li>Practice mindfulness</li>
+                      <li>Take regular breaks</li>
+                      <li>Connect with others</li>
+                      <li>Maintain work-life balance</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-12 text-center">
+                <motion.a
+                  href="/fitness-tips"
+                  className="inline-block bg-slate-900 text-white px-12 py-4 rounded-lg font-medium text-lg hover:bg-slate-800 transition-all duration-300 group"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Explore Fitness Tips
+                  <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
+                </motion.a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };

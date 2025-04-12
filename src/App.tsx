@@ -7,6 +7,7 @@ import {
 import { useEffect } from "react";
 import HealthImportance from "./pages/HealthImportance";
 import Footer from "./pages/components/layouts/Footer";
+import Navigation from "./pages/components/layouts/Navigation";
 import FitnessTips from "./pages/FitnessTips";
 import DietTips from "./pages/DietTips";
 import WorkOutNow from "./pages/WorkoutNow";
@@ -42,23 +43,25 @@ function DynamicTitle() {
 function App() {
   return (
     <Router>
-      <div>
+      <div className="flex flex-col min-h-screen">
         {/* Dynamic Title */}
         <DynamicTitle />
 
         {/* Navigation */}
-        {/* <Navitation /> */}
+        <Navigation />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/download" element={<Login />} />
-          <Route path="/health-importance" element={<HealthImportance />} />
-          <Route path="/fitness-tips" element={<FitnessTips />} />
-          <Route path="/diet-tips" element={<DietTips />} />
-          <Route path="/work-out-now" element={<WorkOutNow />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/download" element={<Login />} />
+            <Route path="/health-importance" element={<HealthImportance />} />
+            <Route path="/fitness-tips" element={<FitnessTips />} />
+            <Route path="/diet-tips" element={<DietTips />} />
+            <Route path="/work-out-now" element={<WorkOutNow />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
 
         {/* Footer */}
         <Footer />
