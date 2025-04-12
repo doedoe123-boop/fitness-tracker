@@ -1,4 +1,4 @@
-import { FaAppleAlt, FaDumbbell, FaClipboardList, FaQuoteLeft, FaQuoteRight, FaUsers, FaHeartbeat, FaLeaf, FaEnvelope } from "react-icons/fa";
+import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 function Home() {
