@@ -1,5 +1,22 @@
 import { motion } from "framer-motion";
-import { FaDumbbell, FaHeartbeat, FaUsers, FaAppleAlt, FaChartLine, FaStar } from "react-icons/fa";
+import {
+  FaDumbbell,
+  FaHeartbeat,
+  FaUsers,
+  FaAppleAlt,
+  FaChartLine,
+  FaStar,
+  FaReact,
+  FaGithub,
+  FaNpm
+} from "react-icons/fa";
+import {
+  SiTypescript,
+  SiTailwindcss,
+  SiVite,
+  SiFramer,
+  SiVercel
+} from "react-icons/si";
 
 function About() {
   return (
@@ -141,6 +158,89 @@ function About() {
               />
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Tech Stack Section - US005 */}
+      <section className="py-24 bg-slate-50">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <motion.div
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl font-bold mb-6 text-slate-900">Built with Modern Tech</h2>
+            <p className="text-lg text-slate-600">
+              Leveraging cutting-edge technologies to deliver a seamless fitness experience
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: <FaReact className="text-[#61DAFB]" />, name: "React", desc: "UI Library" },
+              { icon: <SiTypescript className="text-[#3178C6]" />, name: "TypeScript", desc: "Type-Safe Code" },
+              { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind CSS", desc: "Styling" },
+              { icon: <SiVite className="text-[#646CFF]" />, name: "Vite", desc: "Build Tool" },
+              { icon: <SiFramer className="text-[#BB4B96]" />, name: "Framer Motion", desc: "Animations" },
+              { icon: <FaGithub className="text-slate-900" />, name: "GitHub", desc: "Version Control" },
+              { icon: <FaNpm className="text-[#CB3837]" />, name: "NPM", desc: "Package Manager" },
+              { icon: <SiVercel className="text-slate-900" />, name: "Vercel", desc: "Deployment" }
+            ].map((tech, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 text-center group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="text-4xl mb-4 flex justify-center">{tech.icon}</div>
+                <h3 className="font-semibold text-slate-900">{tech.name}</h3>
+                <p className="text-sm text-slate-600">{tech.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* GitHub Stats */}
+          <motion.div
+            className="mt-16 bg-white p-8 rounded-xl shadow-sm border border-slate-100"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { label: "Open Source", value: "MIT License" },
+                { label: "Latest Release", value: "v1.0.0" },
+                { label: "Last Updated", value: "April 2025" },
+                { label: "Contributors", value: "5+" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <p className="text-sm text-slate-600 mb-1">{stat.label}</p>
+                  <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Developer Call to Action */}
+          <motion.div
+            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <a
+              href="https://github.com/yourusername/fitness-tracker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors duration-300"
+            >
+              <FaGithub className="mr-2" />
+              View on GitHub
+            </a>
+          </motion.div>
         </div>
       </section>
 

@@ -1,3 +1,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Better default styles */
+  html {
+    @apply scroll-smooth antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+
+  /* Mobile tap highlight */
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improved focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-primary ring-offset-2;
+  }
+
+  /* Disable selection on images and icons */
+  img, svg {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+  }
+
+  /* Better form element defaults */
+  input, textarea, select {
+    @apply appearance-none;
+  }
+
+  /* Improved button touch targets on mobile */
+  button, [type='button'], [type='submit'] {
+    @apply select-none;
+  }
+}
+
+@layer components {
+  /* Animation classes */
+  .animate-gradient {
+    @apply bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary bg-[length:200%_200%];
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+/* Better mobile experience */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}

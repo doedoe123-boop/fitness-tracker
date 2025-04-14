@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import BodyExercise from "./components/BodyExercise";
+import FitnessGoals from "./components/FitnessGoals";
 
 const WorkOutNow: React.FC = () => {
   return (
@@ -31,15 +32,25 @@ const WorkOutNow: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Select from our curated collection of exercises designed to help you achieve your fitness goals
+            Set your fitness goals and track your progress as you work towards a healthier lifestyle
           </motion.p>
         </div>
       </section>
 
-      {/* Exercise Component */}
+      {/* Main Content */}
       <section className="py-12">
         <div className="container mx-auto px-6">
-          <BodyExercise />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Goals Section */}
+            <div className="lg:col-span-1">
+              <FitnessGoals />
+            </div>
+            
+            {/* Exercise Section */}
+            <div className="lg:col-span-2">
+              <BodyExercise />
+            </div>
+          </div>
         </div>
       </section>
     </div>

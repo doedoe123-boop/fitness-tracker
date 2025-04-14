@@ -1,10 +1,101 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { exerciseCategories } from "../data/exercises";
+import WorkoutHistory, { WorkoutSession } from "./WorkoutHistory";
+import { FitnessGoal } from "./FitnessGoals";
 
 const BodyExercise: React.FC = () => {
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
   const [poppingText, setPoppingText] = useState<string | null>(null);
+  const [duration, setDuration] = useState(0);
+  const [calories, setCalories] = useState(0);
+  const [isWorkoutActive, setIsWorkoutActive] = useState(false);
+  const [workoutHistory, setWorkoutHistory] = useState<WorkoutSession[]>(() => {
+    const saved = localStorage.getItem('workoutHistory');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // Add goals state
+  const [goals, setGoals] = useState<FitnessGoal[]>(() => {
+    const saved = localStorage.getItem('fitnessGoals');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // Save workout history to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('workoutHistory', JSON.stringify(workoutHistory));
+  }, [workoutHistory]);
+
+  // Update goals in localStorage when they change
+  useEffect(() => {
+    localStorage.setItem('fitnessGoals', JSON.stringify(goals));
+  }, [goals]);
+
+  // Calories burned per minute for each exercise (estimated values)
+  const caloriesPerMinute: { [key: string]: number } = {
+    Running: 10,
+    "Jumping Jacks": 8,
+    Cycling: 7,
+    "Push-ups": 6,
+    Squats: 5,
+    Lunges: 5,
+    Yoga: 3,
+    Stretching: 2,
+    Pilates: 4,
+  };
+
+  useEffect(() => {
+    let timer: number;
+    if (isWorkoutActive && selectedExercise) {
+      timer = window.setInterval(() => {
+        setDuration(prev => prev + 1);
+        setCalories(prev => prev + (caloriesPerMinute[selectedExercise] / 60));
+      }, 1000);
+    }
+    return () => window.clearInterval(timer);
+  }, [isWorkoutActive, selectedExercise]);
+
+  const updateGoals = (duration: number, calories: number) => {
+    setGoals(prevGoals => 
+      prevGoals.map(goal => {
+        const currentDate = new Date();
+        const deadline = new Date(goal.deadline);
+        
+        // Only update goals that haven't expired
+        if (currentDate <= deadline) {
+          switch (goal.type) {
+            case 'calories':
+              return { ...goal, current: goal.current + calories };
+            case 'duration':
+              return { ...goal, current: goal.current + Math.floor(duration / 60) };
+            case 'frequency':
+              // For frequency goals, increment by 1 workout
+              return { ...goal, current: goal.current + 1 };
+            default:
+              return goal;
+          }
+        }
+        return goal;
+      })
+    );
+  };
+
+  const handleStopWorkout = () => {
+    if (selectedExercise && duration > 0) {
+      const newSession: WorkoutSession = {
+        id: Date.now().toString(),
+        exercise: selectedExercise,
+        duration,
+        caloriesBurned: calories,
+        date: new Date().toLocaleDateString(),
+      };
+      setWorkoutHistory(prev => [newSession, ...prev]);
+
+      // Update goals
+      updateGoals(duration, calories);
+    }
+    setIsWorkoutActive(false);
+  };
 
   const motivationalTexts: { [key: string]: string } = {
     Running: "Yeah! Keep running, you can do it! 🏃‍♂️",
@@ -19,9 +110,20 @@ const BodyExercise: React.FC = () => {
   };
 
   const handleExerciseClick = (exercise: string) => {
-    setSelectedExercise(exercise);
+    if (selectedExercise !== exercise) {
+      setSelectedExercise(exercise);
+      setIsWorkoutActive(false);
+      setDuration(0);
+      setCalories(0);
+    }
     setPoppingText(motivationalTexts[exercise] || "You're doing amazing! 🎯");
     setTimeout(() => setPoppingText(null), 2000);
+  };
+
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   const exerciseMedia: { [key: string]: string } = {
@@ -87,6 +189,46 @@ const BodyExercise: React.FC = () => {
           <h3 className="text-2xl font-bold mb-8 text-slate-900">
             Now Performing: <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">{selectedExercise}</span>
           </h3>
+
+          {/* Workout Controls */}
+          <div className="flex justify-center gap-4 mb-8">
+            <motion.button
+              className={`px-6 py-3 rounded-lg font-medium text-white transition-all duration-300 ${
+                isWorkoutActive ? 'bg-red-600 hover:bg-red-700' : 'bg-teal-600 hover:bg-teal-700'
+              }`}
+              onClick={() => isWorkoutActive ? handleStopWorkout() : setIsWorkoutActive(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isWorkoutActive ? 'Stop Workout' : 'Start Workout'}
+            </motion.button>
+            {isWorkoutActive && (
+              <motion.button
+                className="px-6 py-3 rounded-lg font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all duration-300"
+                onClick={() => {
+                  setDuration(0);
+                  setCalories(0);
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Reset
+              </motion.button>
+            )}
+          </div>
+
+          {/* Workout Stats */}
+          <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-8">
+            <div className="bg-slate-50 p-4 rounded-lg">
+              <p className="text-sm text-slate-600 mb-1">Duration</p>
+              <p className="text-2xl font-bold text-slate-900">{formatTime(duration)}</p>
+            </div>
+            <div className="bg-slate-50 p-4 rounded-lg">
+              <p className="text-sm text-slate-600 mb-1">Calories Burned</p>
+              <p className="text-2xl font-bold text-slate-900">{Math.round(calories)}</p>
+            </div>
+          </div>
+
           <div className="flex justify-center items-center">
             {exerciseMedia[selectedExercise] ? (
               <motion.div
@@ -108,6 +250,9 @@ const BodyExercise: React.FC = () => {
           </div>
         </motion.div>
       )}
+
+      {/* Workout History */}
+      <WorkoutHistory history={workoutHistory} />
 
       {/* Motivational Popup */}
       {poppingText && (
