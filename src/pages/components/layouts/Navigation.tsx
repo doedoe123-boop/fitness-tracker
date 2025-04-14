@@ -11,12 +11,16 @@ interface NavItem {
     label: string;
     icon: JSX.Element;
   }>;
+  badge?: string;
 }
 
 const Navigation = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Add new state for updates badge
+  const [hasNewUpdates] = useState(true);
 
   // Handle scroll events for navbar appearance
   useEffect(() => {
@@ -43,7 +47,11 @@ const Navigation = () => {
         { path: "/diet-tips", label: "Diet Tips", icon: <FaAppleAlt /> }
       ]
     },
-    { path: "/work-out-now", label: "Start" },
+    { 
+      path: "/work-out-now", 
+      label: "Start",
+      badge: hasNewUpdates ? "New AI Features" : undefined
+    },
     { path: "/about", label: "About" }
   ];
 
@@ -95,8 +103,13 @@ const Navigation = () => {
                     </motion.svg>
                   </button>
                   
-                  {/* Dropdown Menu */}
-                  <div className="absolute left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  {/* Dropdown Menu with enhanced animations */}
+                  <motion.div 
+                    className="absolute left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                  >
                     <div className="py-2 mt-2 bg-white rounded-lg shadow-xl border border-slate-200">
                       {item.children.map((child, childIndex) => (
                         <Link
@@ -111,13 +124,13 @@ const Navigation = () => {
                         </Link>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               ) : (
                 <Link
                   key={index}
-                  to={item.path || '/'} // Provide default path
-                  className={`text-base transition-colors ${
+                  to={item.path || '/'} 
+                  className={`text-base transition-colors relative ${
                     location.pathname === item.path 
                       ? 'text-brand-primary' 
                       : scrolled 
@@ -126,16 +139,36 @@ const Navigation = () => {
                   }`}
                 >
                   {item.label}
+                  {item.badge && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="absolute -top-3 -right-12 px-2 py-0.5 text-xs font-medium bg-teal-100 text-teal-800 rounded-full whitespace-nowrap"
+                    >
+                      {item.badge}
+                    </motion.span>
+                  )}
                 </Link>
               )
             ))}
 
-            {/* CTA Button */}
+            {/* Enhanced CTA Button with pulse effect */}
             <Link
               to="/download"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-brand-primary hover:bg-brand-primary-700 transition-colors"
+              className="relative inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-brand-primary hover:bg-brand-primary-700 transition-colors group"
             >
-              Download App
+              <motion.span
+                className="absolute -inset-0.5 rounded-lg bg-brand-primary opacity-30"
+                animate={{
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              />
+              <span className="relative">Download App</span>
             </Link>
           </div>
 
@@ -178,7 +211,7 @@ const Navigation = () => {
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Enhanced Mobile Menu with smooth animations */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -189,57 +222,54 @@ const Navigation = () => {
               className="md:hidden overflow-hidden bg-white border-t border-slate-200"
             >
               <div className="px-4 pt-2 pb-8 space-y-4">
-                <Link
-                  to="/"
-                  className={`block py-2 text-base ${
-                    location.pathname === '/' ? 'text-brand-primary' : 'text-slate-600'
-                  }`}
-                >
-                  Home
-                </Link>
-                
-                {/* Mobile Lifestyle Section */}
-                <div className="space-y-2">
-                  <div className="text-sm font-medium text-slate-900 uppercase tracking-wide">
-                    Lifestyle
-                  </div>
-                  {navItems[1].children?.map((item, index) => (
-                    <Link
-                      key={index}
-                      to={item.path}
-                      className={`flex items-center space-x-2 py-2 pl-4 text-base ${
-                        location.pathname === item.path ? 'text-brand-primary' : 'text-slate-600'
-                      }`}
-                    >
-                      {item.icon}
-                      <span>{item.label}</span>
-                    </Link>
-                  ))}
-                </div>
+                {navItems.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    {item.children ? (
+                      <div className="space-y-2">
+                        <div className="text-sm font-medium text-slate-900 uppercase tracking-wide">
+                          {item.label}
+                        </div>
+                        {item.children.map((child, childIndex) => (
+                          <Link
+                            key={childIndex}
+                            to={child.path}
+                            className={`flex items-center space-x-2 py-2 pl-4 text-base ${
+                              location.pathname === child.path ? 'text-brand-primary' : 'text-slate-600'
+                            }`}
+                          >
+                            {child.icon}
+                            <span>{child.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : (
+                      <Link
+                        to={item.path || '/'}
+                        className={`block py-2 text-base relative ${
+                          location.pathname === item.path ? 'text-brand-primary' : 'text-slate-600'
+                        }`}
+                      >
+                        {item.label}
+                        {item.badge && (
+                          <span className="ml-2 px-2 py-0.5 text-xs font-medium bg-teal-100 text-teal-800 rounded-full">
+                            {item.badge}
+                          </span>
+                        )}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
 
                 <Link
                   to="/work-out-now"
-                  className={`block py-2 text-base ${
-                    location.pathname === '/work-out-now' ? 'text-brand-primary' : 'text-slate-600'
-                  }`}
+                  className="block w-full text-center px-6 py-3 rounded-lg text-white bg-brand-primary hover:bg-brand-primary-700 transition-colors mt-6"
                 >
-                  Start
-                </Link>
-                
-                <Link
-                  to="/about"
-                  className={`block py-2 text-base ${
-                    location.pathname === '/about' ? 'text-brand-primary' : 'text-slate-600'
-                  }`}
-                >
-                  About
-                </Link>
-
-                <Link
-                  to="/download"
-                  className="block w-full text-center py-3 rounded-lg text-white bg-brand-primary hover:bg-brand-primary-700 transition-colors"
-                >
-                  Download App
+                  Start Working Out
                 </Link>
               </div>
             </motion.div>
