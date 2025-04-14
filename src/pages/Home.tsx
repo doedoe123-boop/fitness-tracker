@@ -124,7 +124,7 @@ function Home() {
 
       {/* What's New Section */}
       <motion.div 
-        className="relative -mt-12 mb-12 px-6"
+        className="relative -mt-12 mb-24 px-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
@@ -140,13 +140,14 @@ function Home() {
                 <p className="text-slate-700 mt-1 sm:mt-0 sm:ml-2">New AI-powered workout recommendations and improved progress tracking!</p>
               </div>
             </div>
-            <motion.button
+            <motion.a
+              href="/work-out-now"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="w-full sm:w-auto px-4 py-2 text-sm font-medium bg-slate-50 hover:bg-slate-100 text-slate-900 rounded-lg transition-colors flex items-center justify-center"
             >
               Learn More <span className="ml-2">→</span>
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </motion.div>
