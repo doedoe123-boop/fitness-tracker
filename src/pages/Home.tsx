@@ -1,4 +1,4 @@
-import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, FaEnvelope, FaArrowRight, FaPlayCircle } from "react-icons/fa";
+import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, FaEnvelope, FaArrowRight, FaPlayCircle, FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -22,7 +22,7 @@ function Home() {
   return (
     <div className="bg-white text-slate-800">
       {/* Hero Section - US001 */}
-      <section className="min-h-[90vh] flex flex-col md:flex-row items-center justify-between px-6 lg:px-24 py-16 relative overflow-hidden bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70">
+      <section className="min-h-[100vh] flex flex-col md:flex-row items-center justify-between px-6 lg:px-24 py-16 relative overflow-hidden bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70">
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -35,13 +35,21 @@ function Home() {
             Your Personal Fitness Journey Starts Here
           </div>
           
+          <motion.p
+            className="text-lg font-medium tracking-wide text-teal-700 uppercase mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Your #1 Fitness Companion
+          </motion.p>
+
           <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold leading-tight text-slate-900 text-center md:text-left">
-            Smart Fitness Tracking for <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Everyone</span>
+            Transform Your Body, <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Track Your Progress</span>
           </h1>
           
           <p className="text-lg text-slate-600 max-w-xl leading-relaxed text-center md:text-left">
-            Track workouts, set goals, and monitor progress with our intelligent fitness companion. 
-            Real-time tracking, personalized insights, and a supportive community to help you achieve your fitness goals.
+            Your all-in-one fitness solution for workout tracking, personalized routines, and real-time progress monitoring. Join over 10,000 users transforming their lives today.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
@@ -113,6 +121,36 @@ function Home() {
           </motion.div>
         )}
       </section>
+
+      {/* What's New Section */}
+      <motion.div 
+        className="relative -mt-12 mb-24 px-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-white/80 backdrop-blur-lg rounded-xl border border-slate-200/80 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-start sm:items-center space-x-4 w-full sm:w-auto">
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-teal-100 text-teal-600 flex-shrink-0">
+                <FaStar className="w-5 h-5" />
+              </span>
+              <div>
+                <span className="text-sm font-medium text-teal-600 block sm:inline">What's New</span>
+                <p className="text-slate-700 mt-1 sm:mt-0 sm:ml-2">New AI-powered workout recommendations and improved progress tracking!</p>
+              </div>
+            </div>
+            <motion.a
+              href="/work-out-now"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto px-4 py-2 text-sm font-medium bg-slate-50 hover:bg-slate-100 text-slate-900 rounded-lg transition-colors flex items-center justify-center"
+            >
+              Learn More <span className="ml-2">→</span>
+            </motion.a>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Quick Feature Overview - US004 */}
       <section className="py-24 bg-slate-50">

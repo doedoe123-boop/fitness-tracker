@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/auth/Login";
 import NotFound from "./pages/NotFound";
+import FeatureHighlight from "./pages/components/FeatureHighlight";
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -62,6 +63,9 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
+
+        {/* Feature Highlight */}
+        <FeatureHighlight />
 
         {/* Footer */}
         <Footer />
