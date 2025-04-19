@@ -87,7 +87,7 @@ const FitnessGoals: React.FC = () => {
             <select
               value={newGoal.type}
               onChange={(e) => setNewGoal({ ...newGoal, type: e.target.value })}
-              className="w-full rounded-lg border-slate-200 dark:border-slate-600 focus:border-teal-500 dark:focus:border-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 dark:bg-dark-accent"
+              className="w-full p-2 rounded-lg border-slate-200 dark:border-slate-600 focus:border-teal-500 dark:focus:border-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 dark:bg-dark-accent"
             >
               <option value="calories">Calories to Burn</option>
               <option value="duration">Minutes of Exercise</option>
