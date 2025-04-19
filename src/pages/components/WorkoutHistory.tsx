@@ -23,37 +23,37 @@ const WorkoutHistory: React.FC<WorkoutHistoryProps> = ({ history }) => {
 
   return (
     <div className="mt-12">
-      <h2 className="text-2xl font-bold mb-6 text-slate-900">Workout History</h2>
+      <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Workout History</h2>
       <div className="space-y-4">
         {history.map((session) => (
           <motion.div
             key={session.id}
-            className="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
+            className="bg-white dark:bg-dark-secondary p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-700"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -5 }}
           >
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="flex items-center space-x-3">
-                <FaCalendar className="text-teal-600" />
-                <span className="text-slate-600">{session.exercise}</span>
+                <FaCalendar className="text-teal-600 dark:text-teal-500" />
+                <span className="text-slate-600 dark:text-slate-300">{session.exercise}</span>
               </div>
               <div className="flex items-center space-x-3">
-                <FaClock className="text-sky-600" />
-                <span className="text-slate-600">{formatTime(session.duration)}</span>
+                <FaClock className="text-sky-600 dark:text-sky-500" />
+                <span className="text-slate-600 dark:text-slate-300">{formatTime(session.duration)}</span>
               </div>
               <div className="flex items-center space-x-3">
-                <FaFire className="text-orange-600" />
-                <span className="text-slate-600">{Math.round(session.caloriesBurned)} calories</span>
+                <FaFire className="text-orange-600 dark:text-orange-500" />
+                <span className="text-slate-600 dark:text-slate-300">{Math.round(session.caloriesBurned)} calories</span>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="text-slate-400 text-sm">{session.date}</span>
+                <span className="text-slate-400 dark:text-slate-500 text-sm">{session.date}</span>
               </div>
             </div>
           </motion.div>
         ))}
         {history.length === 0 && (
-          <div className="text-center text-slate-500 py-8">
+          <div className="text-center text-slate-500 dark:text-slate-400 py-8">
             No workout history yet. Start your first workout!
           </div>
         )}

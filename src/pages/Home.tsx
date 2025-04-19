@@ -1,6 +1,7 @@
-import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, FaEnvelope, FaArrowRight, FaPlayCircle, FaStar } from "react-icons/fa";
+import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, FaEnvelope, FaArrowRight, FaPlayCircle, FaStar, FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Testimonials from './components/Testimonials';
 
 function Home() {
   const [showVideo, setShowVideo] = useState(false);
@@ -20,42 +21,62 @@ function Home() {
   };
 
   return (
-    <div className="bg-white text-slate-800">
+    <div className="bg-white dark:bg-dark-primary text-slate-800 dark:text-slate-200">
       {/* Hero Section - US001 */}
-      <section className="min-h-[100vh] flex flex-col md:flex-row items-center justify-between px-6 lg:px-24 py-16 relative overflow-hidden bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
+      <section className="min-h-[90vh] md:min-h-[100vh] flex flex-col md:flex-row items-center justify-between px-4 md:px-6 lg:px-24 pt-24 md:py-16 relative overflow-hidden bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70 dark:from-dark-secondary dark:via-dark-primary dark:to-dark-secondary">
+        <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-[0.015] pointer-events-none" />
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="md:w-1/2 flex flex-col items-center md:items-start space-y-8 relative z-10 max-w-2xl mx-auto md:mx-0"
         >
-          <div className="bg-teal-50 text-teal-700 px-4 py-2 rounded-full text-sm font-medium inline-flex items-center">
+          <div className="bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 px-4 py-2 rounded-full text-sm font-medium inline-flex items-center">
             <FaHeartbeat className="mr-2" />
-            Your Personal Fitness Journey Starts Here
+            Your Complete Fitness & Health Platform
           </div>
           
           <motion.p
-            className="text-lg font-medium tracking-wide text-teal-700 uppercase mb-4"
+            className="text-lg font-medium tracking-wide text-teal-700 dark:text-teal-400 uppercase mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Your #1 Fitness Companion
+            Track, Train, Transform
           </motion.p>
 
-          <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold leading-tight text-slate-900 text-center md:text-left">
-            Transform Your Body, <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Track Your Progress</span>
+          <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold leading-tight text-slate-900 dark:text-white text-center md:text-left">
+            Transform Your Body, <span className="bg-gradient-to-r from-teal-600 to-cyan-600 dark:from-teal-500 dark:to-cyan-500 bg-clip-text text-transparent">Master Your Health</span>
           </h1>
           
-          <p className="text-lg text-slate-600 max-w-xl leading-relaxed text-center md:text-left">
-            Your all-in-one fitness solution for workout tracking, personalized routines, and real-time progress monitoring. Join over 10,000 users transforming their lives today.
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed text-center md:text-left">
+            Achieve your fitness goals with personalized workouts, nutrition tracking, and expert guidance. Join thousands of users who have transformed their lives with our comprehensive fitness platform.
           </p>
+          
+          <ul className="grid grid-cols-2 gap-4 mb-8">
+            {[
+              "AI-Powered Workout Plans",
+              "Real-Time Progress Tracking",
+              "Nutrition & Diet Guidance",
+              "Expert Health Tips"
+            ].map((feature, index) => (
+              <motion.li
+                key={index}
+                className="flex items-center space-x-2 text-slate-700 dark:text-slate-300"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 + (index * 0.1) }}
+              >
+                <FaCheckCircle className="text-teal-600 dark:text-teal-500 flex-shrink-0" />
+                <span>{feature}</span>
+              </motion.li>
+            ))}
+          </ul>
           
           <div className="flex flex-col sm:flex-row gap-4">
             <motion.a
               href="/work-out-now"
-              className="bg-slate-900 text-white px-8 py-4 rounded-lg font-medium text-lg shadow-lg hover:shadow-xl hover:bg-slate-800 transition-all duration-300 text-center group"
+              className="bg-slate-900 dark:bg-slate-800 text-white px-8 py-4 rounded-lg font-medium text-lg shadow-lg hover:shadow-xl hover:bg-slate-800 dark:hover:bg-slate-700 transition-all duration-300 text-center group"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -65,7 +86,7 @@ function Home() {
             
             <motion.button
               onClick={() => setShowVideo(true)}
-              className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-slate-200 text-slate-700 font-medium text-lg hover:bg-slate-50 transition-all duration-300 group"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-lg border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-lg hover:bg-slate-50 dark:hover:bg-dark-accent transition-all duration-300 group"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -112,7 +133,7 @@ function Home() {
                 ✕
               </button>
               <iframe
-                src="https://www.youtube.com/embed/demo-video-id"
+                src="#"
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -124,7 +145,7 @@ function Home() {
 
       {/* What's New Section */}
       <motion.div 
-        className="relative -mt-12 mb-24 px-6"
+        className="relative -mt-8 md:-mt-12 mb-16 md:mb-24 px-4 md:px-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
@@ -152,8 +173,11 @@ function Home() {
         </div>
       </motion.div>
 
+      {/* Insert Testimonials section before Features */}
+      <Testimonials />
+
       {/* Quick Feature Overview - US004 */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -161,10 +185,10 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">
+            <h2 className="text-4xl font-bold mb-6">
               Everything you need to succeed
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-lg">
               Simple, powerful tools to track your fitness journey
             </p>
           </motion.div>
@@ -193,7 +217,7 @@ function Home() {
               <motion.a
                 key={index}
                 href={feature.link}
-                className="group bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                className="group p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -201,8 +225,8 @@ function Home() {
               >
                 <div className="relative z-10">
                   <div className="mb-6">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-4 text-slate-900">{feature.title}</h3>
-                  <p className="text-slate-600 mb-4">{feature.text}</p>
+                  <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 mb-4">{feature.text}</p>
                   <span className="text-teal-600 font-medium inline-flex items-center group-hover:translate-x-2 transition-transform">
                     Learn more <FaArrowRight className="ml-2" />
                   </span>
@@ -222,8 +246,8 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">See it in Action</h2>
-            <p className="text-lg text-slate-600">
+            <h2 className="text-4xl font-bold mb-6">See it in Action</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               Take a peek at the intuitive interface and powerful features
             </p>
           </motion.div>
@@ -241,14 +265,14 @@ function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
               >
-                <div className="aspect-video rounded-xl overflow-hidden bg-slate-100">
+                <div className="aspect-video rounded-xl overflow-hidden">
                   <img
                     src={screenshot.src}
                     alt={screenshot.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-medium text-slate-900 mt-4 text-center">
+                <h3 className="text-lg font-medium mt-4 text-center text-slate-600 dark:text-slate-400">
                   {screenshot.title}
                 </h3>
               </motion.div>
@@ -311,7 +335,7 @@ function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -319,10 +343,10 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">
+            <h2 className="text-4xl font-bold mb-6">
               Everything you need to succeed
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               Comprehensive tools and guidance to support your fitness journey every step of the way
             </p>
           </motion.div>
@@ -350,7 +374,7 @@ function Home() {
               <motion.a
                 key={index}
                 href={item.link}
-                className="group bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden border border-slate-100"
+                className="group p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden border border-slate-400 dark:border-slate-700"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -359,8 +383,8 @@ function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative z-10">
                   <div className="mb-6">{item.icon}</div>
-                  <h3 className="text-xl font-semibold mb-4 text-slate-900">{item.title}</h3>
-                  <p className="text-slate-600">{item.text}</p>
+                  <h3 className="text-xl font-semibold mb-4">{item.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-400">{item.text}</p>
                 </div>
               </motion.a>
             ))}
@@ -377,29 +401,29 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">Real Results, Real People</h2>
-            <p className="text-lg text-slate-600">
+            <h2 className="text-4xl font-bold mb-6">Real Results, Real People</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               Discover how our platform has helped transform lives and achieve fitness goals
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
-                name: "Sarah M.",
+                name: "Sarah J.",
                 achievement: "Lost 30lbs in 6 months",
                 story: "Following the workout plans and nutrition guides helped me achieve my weight loss goals. The community support was incredible!",
-                image: "/assets/hero/healthier.png"
+                image: "/assets/testimonial/1.jpg"
               },
               {
-                name: "Mike R.",
+                name: "Shen R.",
                 achievement: "Gained muscle mass",
                 story: "The personalized strength training programs helped me build the muscle I always wanted. The progress tracking kept me motivated.",
-                image: "/assets/hero/healthier.png"
+                image: "/assets/testimonial/2.jpg"
               }
             ].map((story, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group"
+                className="rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group border border-slate-200 dark:border-slate-700"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -415,9 +439,9 @@ function Home() {
                     </div>
                   </div>
                   <div className="flex-1 p-8">
-                    <h3 className="text-2xl font-semibold mb-2 text-slate-900">{story.name}</h3>
-                    <p className="text-teal-600 font-medium mb-4">{story.achievement}</p>
-                    <p className="text-slate-600 leading-relaxed">{story.story}</p>
+                    <h3 className="text-2xl font-semibold mb-2">{story.name}</h3>
+                    <p className="font-medium mb-4">{story.achievement}</p>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{story.story}</p>
                   </div>
                 </div>
               </motion.div>
@@ -427,7 +451,7 @@ function Home() {
       </section>
 
       {/* Health Tips Section */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-24">
         <div className="container mx-auto px-6 max-w-7xl">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -435,8 +459,8 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">Expert Health Tips</h2>
-            <p className="text-lg text-slate-600">
+            <h2 className="text-4xl font-bold mb-6">Expert Health Tips</h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">
               Professional guidance to help you maintain a healthy and balanced lifestyle
             </p>
           </motion.div>
@@ -460,7 +484,7 @@ function Home() {
             ].map((category, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300"
+                className="p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -468,12 +492,12 @@ function Home() {
                 <div className="flex items-center justify-center mb-6">
                   {category.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-6 text-center text-slate-900">{category.title}</h3>
+                <h3 className="text-xl font-semibold mb-6 text-center">{category.title}</h3>
                 <ul className="space-y-4">
                   {category.tips.map((tip, tipIndex) => (
                     <li key={tipIndex} className="flex items-start space-x-3">
-                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2 bg-slate-300"></span>
-                      <span className="text-slate-600">{tip}</span>
+                      <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2 bg-slate-300 dark:bg-slate-600"></span>
+                      <span className="text-slate-600 dark:text-slate-400">{tip}</span>
                     </li>
                   ))}
                 </ul>
@@ -501,8 +525,8 @@ function Home() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               >
                 <div className="flex justify-center mb-4">{stat.icon}</div>
-                <h3 className="text-4xl font-bold text-slate-900 mb-2">{stat.number}</h3>
-                <p className="text-slate-600 font-medium">{stat.label}</p>
+                <h3 className="text-4xl font-bold mb-2">{stat.number}</h3>
+                <p className="text-slate-600 dark:text-slate-400 font-medium">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -510,21 +534,21 @@ function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <section className="py-24">
+        <div className="container mx-auto px-6 max-w-4xl ">
           <motion.div
-            className="bg-white p-12 rounded-2xl shadow-xl relative overflow-hidden"
+            className="p-12 rounded-2xl shadow-xl relative overflow-hidden border border-slate-300 dark:border-slate-700"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="relative z-10">
               <div className="flex justify-center mb-8">
-                <FaEnvelope className="text-5xl text-slate-900" />
+                <FaEnvelope className="text-5xl text-slate-900 dark:text-slate-700" />
               </div>
               <div className="text-center max-w-2xl mx-auto mb-8">
-                <h2 className="text-3xl font-bold mb-4 text-slate-900">Stay Updated</h2>
-                <p className="text-lg text-slate-600">
+                <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
+                <p className="text-lg text-slate-600 dark:text-slate-400">
                   Get weekly tips, motivation, and exclusive content delivered to your inbox
                 </p>
               </div>
@@ -532,11 +556,11 @@ function Home() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-6 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300"
+                  className="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300"
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3 rounded-lg bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all duration-300"
+                  className="px-8 py-3 rounded-lg bg-slate-900 dark:bg-slate-800 text-white font-medium hover:bg-slate-800 transition-all duration-300"
                 >
                   Subscribe
                 </button>

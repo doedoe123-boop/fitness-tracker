@@ -1,288 +1,231 @@
-import { motion } from "framer-motion";
-import {
-  FaDumbbell,
-  FaHeartbeat,
-  FaUsers,
-  FaAppleAlt,
-  FaChartLine,
-  FaStar,
-  FaReact,
-  FaGithub,
-  FaNpm
-} from "react-icons/fa";
-import {
-  SiTypescript,
-  SiTailwindcss,
-  SiVite,
-  SiFramer,
-  SiVercel
-} from "react-icons/si";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaTwitter, FaHeart, FaCode, FaDumbbell, FaBrain, FaUsers, FaMobileAlt } from 'react-icons/fa';
 
-function About() {
+const features = [
+  {
+    icon: <FaDumbbell className="text-rose-600 dark:text-rose-500" />,
+    title: 'Smart Workout Tracking',
+    description: 'Advanced AI algorithms help track and optimize your workouts in real-time.'
+  },
+  {
+    icon: <FaBrain className="text-purple-600 dark:text-purple-500" />,
+    title: 'AI-Powered Recommendations',
+    description: 'Personalized workout and nutrition recommendations based on your goals and progress.'
+  },
+  {
+    icon: <FaUsers className="text-emerald-600 dark:text-emerald-500" />,
+    title: 'Community Support',
+    description: 'Connect with like-minded individuals and share your fitness journey.'
+  },
+  {
+    icon: <FaMobileAlt className="text-sky-600 dark:text-sky-500" />,
+    title: 'Cross-Platform',
+    description: 'Access your fitness data seamlessly across all your devices.'
+  }
+];
+
+const team = [
+  {
+    name: 'Alex Thompson',
+    role: 'Lead Developer',
+    image: '/assets/team/1.jpg',
+    social: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+      twitter: 'https://twitter.com'
+    }
+  },
+  {
+    name: 'Sarah Chen',
+    role: 'UI/UX Designer',
+    image: '/assets/team/2.jpg',
+    social: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+      twitter: 'https://twitter.com'
+    }
+  },
+  {
+    name: 'Marcus Rodriguez',
+    role: 'Fitness Expert',
+    image: '/assets/team/3.jpg',
+    social: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com',
+      twitter: 'https://twitter.com'
+    }
+  }
+];
+
+const About: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white text-slate-800">
-      {/* Hero Section */}
-      <motion.div
-        className="relative bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70 min-h-[60vh] flex items-center justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <motion.p
-            className="text-lg font-medium tracking-wide text-teal-700 uppercase mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            About Us
-          </motion.p>
-          <motion.h1
-            className="text-5xl md:text-6xl font-bold mb-6 text-slate-900"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Empowering Your <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Fitness Journey</span>
-          </motion.h1>
-          <motion.p
-            className="text-xl leading-relaxed max-w-3xl mx-auto text-slate-600"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Your trusted partner in achieving a healthier, stronger, and more active
-            lifestyle. Track progress, get expert guidance, and unlock your full potential.
-          </motion.p>
-        </div>
-      </motion.div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-dark-secondary dark:via-dark-primary dark:to-dark-secondary pt-24">
+      <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-[0.015] pointer-events-none" />
+      
+      <div className="container mx-auto px-6 py-12">
+        {/* Hero Section */}
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
+            About Our Mission
+          </h1>
+          <p className="text-xl text-slate-600 dark:text-slate-300">
+            We're passionate about making fitness tracking smarter, more intuitive, and accessible to everyone.
+          </p>
+        </motion.div>
 
-      {/* Mission Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">Our Mission</h2>
-            <p className="text-lg text-slate-600">
-              We believe in making fitness accessible, enjoyable, and sustainable for everyone.
-              Through innovative tools and supportive community, we help you build lasting healthy habits.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <FaHeartbeat className="text-5xl text-rose-600" />,
-                title: "Personalized Approach",
-                description: "Customized workout and nutrition plans tailored to your unique goals and preferences."
-              },
-              {
-                icon: <FaUsers className="text-5xl text-sky-600" />,
-                title: "Expert Guidance",
-                description: "Access to certified trainers and nutritionists for professional advice and support."
-              },
-              {
-                icon: <FaChartLine className="text-5xl text-emerald-600" />,
-                title: "Progress Tracking",
-                description: "Comprehensive tools to monitor your achievements and celebrate milestones."
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 group"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex justify-center mb-6">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-4 text-center text-slate-900">{feature.title}</h3>
-                <p className="text-slate-600 text-center">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What We Offer Section */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          {features.map((feature, index) => (
             <motion.div
-              className="space-y-6"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              key={feature.title}
+              className="bg-white dark:bg-dark-secondary p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <h2 className="text-4xl font-bold text-slate-900">What Sets Us Apart</h2>
-              <p className="text-lg text-slate-600">
-                We combine cutting-edge technology with proven fitness methodologies to deliver
-                an exceptional experience that helps you achieve your health and fitness goals.
+              <div className="text-3xl mb-4">{feature.icon}</div>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900 dark:text-white">
+                {feature.title}
+              </h3>
+              <p className="text-slate-600 dark:text-slate-300">
+                {feature.description}
               </p>
-              <ul className="space-y-4">
-                {[
-                  { icon: <FaDumbbell className="text-amber-600" />, text: "Science-backed workout programs" },
-                  { icon: <FaAppleAlt className="text-emerald-600" />, text: "Nutritionist-designed meal plans" },
-                  { icon: <FaUsers className="text-sky-600" />, text: "Supportive community environment" },
-                  { icon: <FaStar className="text-yellow-600" />, text: "Premium quality resources" }
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-center space-x-3"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <span className="flex-shrink-0">{item.icon}</span>
-                    <span className="text-slate-600">{item.text}</span>
-                  </motion.li>
-                ))}
-              </ul>
             </motion.div>
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-200 to-cyan-200 rounded-2xl blur-3xl opacity-20" />
-              <img
-                src="/assets/hero/healthier.png"
-                alt="Fitness Journey"
-                className="relative z-10 w-full rounded-2xl shadow-2xl"
-              />
-            </motion.div>
-          </div>
+          ))}
         </div>
-      </section>
 
-      {/* Tech Stack Section - US005 */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl font-bold mb-6 text-slate-900">Built with Modern Tech</h2>
-            <p className="text-lg text-slate-600">
-              Leveraging cutting-edge technologies to deliver a seamless fitness experience
-            </p>
-          </motion.div>
+        {/* Team Section */}
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+            Meet Our Team
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-300">
+            A passionate group of individuals dedicated to revolutionizing fitness tracking.
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { icon: <FaReact className="text-[#61DAFB]" />, name: "React", desc: "UI Library" },
-              { icon: <SiTypescript className="text-[#3178C6]" />, name: "TypeScript", desc: "Type-Safe Code" },
-              { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind CSS", desc: "Styling" },
-              { icon: <SiVite className="text-[#646CFF]" />, name: "Vite", desc: "Build Tool" },
-              { icon: <SiFramer className="text-[#BB4B96]" />, name: "Framer Motion", desc: "Animations" },
-              { icon: <FaGithub className="text-slate-900" />, name: "GitHub", desc: "Version Control" },
-              { icon: <FaNpm className="text-[#CB3837]" />, name: "NPM", desc: "Package Manager" },
-              { icon: <SiVercel className="text-slate-900" />, name: "Vercel", desc: "Deployment" }
-            ].map((tech, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 text-center group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-4xl mb-4 flex justify-center">{tech.icon}</div>
-                <h3 className="font-semibold text-slate-900">{tech.name}</h3>
-                <p className="text-sm text-slate-600">{tech.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* GitHub Stats */}
-          <motion.div
-            className="mt-16 bg-white p-8 rounded-xl shadow-sm border border-slate-100"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { label: "Open Source", value: "MIT License" },
-                { label: "Latest Release", value: "v1.0.0" },
-                { label: "Last Updated", value: "April 2025" },
-                { label: "Contributors", value: "5+" }
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <p className="text-sm text-slate-600 mb-1">{stat.label}</p>
-                  <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          {team.map((member, index) => (
+            <motion.div
+              key={member.name}
+              className="bg-white dark:bg-dark-secondary rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-100 dark:border-slate-700"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <div className="aspect-w-4 aspect-h-3">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-1 text-slate-900 dark:text-white">
+                  {member.name}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 mb-4">{member.role}</p>
+                <div className="flex space-x-4">
+                  {Object.entries(member.social).map(([platform, url]) => (
+                    <motion.a
+                      key={platform}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {platform === 'github' && <FaGithub />}
+                      {platform === 'linkedin' && <FaLinkedin />}
+                      {platform === 'twitter' && <FaTwitter />}
+                    </motion.a>
+                  ))}
                 </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Values Section */}
+        <motion.div
+          className="bg-white dark:bg-dark-secondary rounded-2xl p-8 shadow-xl border border-slate-100 dark:border-slate-700 relative overflow-hidden"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-50 dark:from-teal-900/20 to-transparent opacity-50" />
+          <div className="relative z-10">
+            <div className="flex items-center justify-center mb-8">
+              <FaHeart className="text-4xl text-rose-600 dark:text-rose-500" />
+              <FaCode className="text-4xl text-slate-900 dark:text-white mx-4" />
+              <FaDumbbell className="text-4xl text-teal-600 dark:text-teal-500" />
+            </div>
+            <h2 className="text-3xl font-bold text-center mb-8 text-slate-900 dark:text-white">
+              Our Values
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                'Building innovative solutions for fitness enthusiasts',
+                'Creating a supportive and inclusive fitness community',
+                'Continuously improving based on user feedback'
+              ].map((value, index) => (
+                <motion.div
+                  key={index}
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <p className="text-slate-600 dark:text-slate-300">{value}</p>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
-
-          {/* Developer Call to Action */}
-          <motion.div
-            className="mt-16 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <a
-              href="https://github.com/yourusername/fitness-tracker"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors duration-300"
-            >
-              <FaGithub className="mr-2" />
-              View on GitHub
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/public/assets/hero/healthier.png')] opacity-5 bg-cover bg-center mix-blend-overlay" />
-        <div className="container mx-auto px-6 max-w-4xl relative z-10">
-          <div className="text-center">
-            <motion.h2 
-              className="text-4xl font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Start Your Fitness Journey Today
-            </motion.h2>
-            <motion.p
-              className="text-lg mb-12 max-w-2xl mx-auto text-slate-300"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Join thousands of others who have transformed their lives through our comprehensive
-              fitness platform. Your journey to a healthier lifestyle starts here.
-            </motion.p>
-            <motion.a
-              href="/work-out-now"
-              className="inline-block bg-white px-12 py-4 rounded-lg text-slate-900 font-medium text-lg hover:bg-slate-100 transition-all duration-300 group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started Now
-              <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
-            </motion.a>
           </div>
-        </div>
-      </section>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          className="text-center max-w-2xl mx-auto mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+            Join Our Journey
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-300 mb-8">
+            Be part of our mission to revolutionize fitness tracking and help people achieve their health goals.
+          </p>
+          <motion.a
+            href="/work-out-now"
+            className="inline-block bg-slate-900 dark:bg-slate-800 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Start Your Journey
+          </motion.a>
+        </motion.div>
+      </div>
     </div>
   );
-}
+};
 
 export default About;

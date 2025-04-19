@@ -12,6 +12,13 @@
     touch-action: manipulation;
   }
 
+  /* Smooth dark mode transitions */
+  html,
+  body,
+  * {
+    @apply transition-colors duration-200;
+  }
+
   /* Mobile tap highlight */
   html {
     -webkit-tap-highlight-color: transparent;
@@ -19,7 +26,7 @@
 
   /* Improved focus styles */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-primary ring-offset-2;
+    @apply outline-none ring-2 ring-brand-primary dark:ring-brand-primary-400 ring-offset-2 dark:ring-offset-dark-primary;
   }
 
   /* Disable selection on images and icons */
@@ -30,27 +37,32 @@
     user-select: none;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar - Light Mode */
   ::-webkit-scrollbar {
     @apply w-2;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-100;
+    @apply bg-slate-100 dark:bg-dark-accent;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+    @apply bg-slate-300 dark:bg-slate-600 rounded-full hover:bg-slate-400 dark:hover:bg-slate-500 transition-colors;
   }
 
   /* Better form element defaults */
   input, textarea, select {
-    @apply appearance-none;
+    @apply appearance-none bg-white dark:bg-dark-secondary text-slate-900 dark:text-slate-200;
   }
 
   /* Improved button touch targets on mobile */
   button, [type='button'], [type='submit'] {
     @apply select-none;
+  }
+
+  /* Dark mode selection colors */
+  ::selection {
+    @apply bg-brand-primary/20 dark:bg-brand-primary/30 text-slate-900 dark:text-white;
   }
 }
 
@@ -61,11 +73,42 @@
     animation: gradient 15s ease infinite;
   }
 
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  /* Dark mode card styles */
+  .card {
+    @apply bg-white dark:bg-dark-secondary border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300;
   }
+
+  /* Dark mode text styles */
+  .text-primary {
+    @apply text-slate-900 dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-slate-600 dark:text-slate-300;
+  }
+
+  .text-tertiary {
+    @apply text-slate-500 dark:text-slate-400;
+  }
+
+  /* Dark mode background styles */
+  .bg-primary {
+    @apply bg-white dark:bg-dark-primary;
+  }
+
+  .bg-secondary {
+    @apply bg-slate-50 dark:bg-dark-secondary;
+  }
+
+  .bg-accent {
+    @apply bg-slate-100 dark:bg-dark-accent;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Better mobile experience */

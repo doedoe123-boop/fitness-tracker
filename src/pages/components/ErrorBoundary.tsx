@@ -40,14 +40,14 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-dark-secondary dark:via-dark-primary dark:to-dark-secondary flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-[0.015] pointer-events-none" />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full relative overflow-hidden"
+            className="bg-white dark:bg-dark-secondary rounded-2xl shadow-xl p-8 max-w-lg w-full relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-rose-50 to-transparent opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-50 dark:from-rose-900/20 to-transparent opacity-50" />
             <div className="relative z-10">
               <div className="flex justify-center mb-6">
                 <motion.div
@@ -59,22 +59,22 @@ class ErrorBoundary extends Component<Props, State> {
                     damping: 20 
                   }}
                 >
-                  <FaExclamationTriangle className="text-5xl text-rose-600" />
+                  <FaExclamationTriangle className="text-5xl text-rose-600 dark:text-rose-500" />
                 </motion.div>
               </div>
 
-              <h1 className="text-2xl font-bold text-slate-900 text-center mb-4">
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white text-center mb-4">
                 Oops! Something went wrong
               </h1>
 
-              <p className="text-slate-600 text-center mb-6">
+              <p className="text-slate-600 dark:text-slate-300 text-center mb-6">
                 We're sorry for the inconvenience. Please try refreshing the page or contact support if the problem persists.
               </p>
 
               <div className="flex justify-center gap-4">
                 <motion.button
                   onClick={() => window.location.reload()}
-                  className="inline-flex items-center px-6 py-3 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors"
+                  className="inline-flex items-center px-6 py-3 rounded-lg bg-slate-900 dark:bg-slate-800 text-white hover:bg-slate-800 dark:hover:bg-slate-700 transition-colors"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -84,9 +84,9 @@ class ErrorBoundary extends Component<Props, State> {
               </div>
 
               {import.meta.env.DEV && (
-                <div className="mt-8 p-4 bg-slate-50 rounded-lg">
-                  <details className="text-sm text-slate-600">
-                    <summary className="cursor-pointer mb-2 font-medium text-slate-900">
+                <div className="mt-8 p-4 bg-slate-50 dark:bg-dark-accent rounded-lg">
+                  <details className="text-sm text-slate-600 dark:text-slate-400">
+                    <summary className="cursor-pointer mb-2 font-medium text-slate-900 dark:text-slate-200">
                       Error Details
                     </summary>
                     <pre className="whitespace-pre-wrap overflow-auto">

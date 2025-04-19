@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 
 const NotFoundPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70">
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
+    <div className="min-h-screen bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70 dark:from-dark-secondary dark:via-dark-primary dark:to-dark-secondary flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-[0.015] pointer-events-none" />
       <div className="container mx-auto px-6 py-24 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           {/* 404 Display with Animation */}
@@ -22,20 +22,20 @@ const NotFoundPage: React.FC = () => {
 
           {/* Title with Animation */}
           <motion.h1
-            className="text-5xl md:text-6xl font-bold mb-6 text-slate-900"
+            className="text-5xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             Page Not Found
-            <span className="block text-2xl mt-4 bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">
+            <span className="block text-2xl mt-4 bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent dark:from-teal-400 dark:to-cyan-400">
               Time to Switch Up Your Routine!
             </span>
           </motion.h1>
 
           {/* Message with Animation */}
           <motion.p
-            className="text-xl mb-12 text-slate-600"
+            className="text-xl mb-12 text-slate-600 dark:text-slate-300"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -53,7 +53,7 @@ const NotFoundPage: React.FC = () => {
           >
             <motion.a
               href="/"
-              className="inline-block bg-slate-900 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-slate-800 transition-all duration-300 group"
+              className="inline-block bg-slate-900 text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-slate-800 transition-all duration-300 group dark:bg-slate-800 dark:hover:bg-slate-700"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -62,7 +62,7 @@ const NotFoundPage: React.FC = () => {
             </motion.a>
             <motion.a
               href="/work-out-now"
-              className="inline-block bg-white border-2 border-slate-200 text-slate-900 px-8 py-4 rounded-lg font-medium text-lg hover:bg-slate-50 transition-all duration-300 group"
+              className="inline-block bg-white border-2 border-slate-200 text-slate-900 px-8 py-4 rounded-lg font-medium text-lg hover:bg-slate-50 transition-all duration-300 group dark:bg-dark-secondary dark:text-white dark:border-slate-700 dark:hover:bg-dark-accent"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

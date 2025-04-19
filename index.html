@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/heart.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#0D9488" />
+    <meta name="format-detection" content="telephone=no" />
     <title>Fitness Tracker - Your Personal Fitness Journey</title>
+
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -13,15 +22,12 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     
     <!-- Meta Tags -->
-    <meta name="description" content="Transform your fitness journey with our comprehensive fitness tracking app. Set goals, track workouts, and achieve results." />
-    <meta name="keywords" content="fitness tracker, workout app, exercise tracking, fitness goals, health monitoring" />
-    <meta name="theme-color" content="#0D9488" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="Transform your fitness journey with our comprehensive fitness tracking app. Set personalized goals, track workouts, and achieve results with AI-powered guidance." />
+    <meta name="keywords" content="fitness tracker, workout app, exercise tracking, fitness goals, health monitoring, AI workout plans" />
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Fitness Tracker - Your Personal Fitness Journey" />
-    <meta property="og:description" content="Transform your fitness journey with our comprehensive fitness tracking app. Set goals, track workouts, and achieve results." />
+    <meta property="og:description" content="Transform your fitness journey with our comprehensive fitness tracking app. Set personalized goals, track workouts, and achieve results with AI-powered guidance." />
     <meta property="og:image" content="/assets/preview/preview.jpg" />
     <meta property="og:url" content="https://yourwebsite.com/" />
     <meta property="og:type" content="website" />
@@ -29,7 +35,7 @@
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Fitness Tracker - Your Personal Fitness Journey" />
-    <meta name="twitter:description" content="Transform your fitness journey with our comprehensive fitness tracking app. Set goals, track workouts, and achieve results." />
+    <meta name="twitter:description" content="Transform your fitness journey with our comprehensive fitness tracking app. Set personalized goals, track workouts, and achieve results with AI-powered guidance." />
     <meta name="twitter:image" content="/assets/preview/preview.jpg" />
 
     <!-- App Icons -->
@@ -38,6 +44,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/heart.svg">
     <meta name="msapplication-TileColor" content="#0D9488">
 
+    <!-- PWA Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-title" content="Fitness Tracker">
+    <meta name="application-name" content="Fitness Tracker">
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -45,7 +56,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NJ4563HQ');</script>
   </head>
-  <body>
+  <body class="antialiased">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ4563HQ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

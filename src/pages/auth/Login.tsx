@@ -1,116 +1,142 @@
-import { motion } from "framer-motion";
-import { FaDownload, FaMobileAlt, FaRocket, FaUserPlus } from "react-icons/fa";
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa';
 
 const Login: React.FC = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle authentication logic here
+  };
+
   return (
-    <div className="min-h-screen bg-white text-slate-800">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-sky-50/70 via-white to-cyan-50/70 py-16 min-h-screen flex items-center">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.015] pointer-events-none" />
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Content */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-center md:text-left"
-              >
-                <motion.p
-                  className="text-lg font-medium tracking-wide text-teal-700 uppercase mb-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                  Download Our App
-                </motion.p>
-                <motion.h1
-                  className="text-4xl md:text-5xl font-bold mb-6 text-slate-900"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                >
-                  Start Your <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">Fitness Journey</span>
-                </motion.h1>
-                <motion.p
-                  className="text-lg text-slate-600 mb-8 leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                  Join thousands of users who are transforming their lives with our comprehensive fitness tracking platform.
-                </motion.p>
-                
-                {/* Features */}
-                <motion.div
-                  className="space-y-4 mb-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                >
-                  {[
-                    { icon: <FaMobileAlt />, text: "Available on iOS and Android" },
-                    { icon: <FaRocket />, text: "Real-time progress tracking" },
-                    { icon: <FaUserPlus />, text: "Join a supportive community" },
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3 text-slate-600">
-                      <span className="text-teal-600">{feature.icon}</span>
-                      <span>{feature.text}</span>
-                    </div>
-                  ))}
-                </motion.div>
-
-                {/* CTAs */}
-                <motion.div
-                  className="flex flex-col sm:flex-row items-center gap-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                >
-                  <motion.a
-                    href="#"
-                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-slate-900 text-white rounded-lg font-medium text-lg hover:bg-slate-800 transition-all duration-300 group"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <FaDownload className="mr-2" />
-                    Download Now
-                    <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 border-2 border-slate-200 text-slate-900 rounded-lg font-medium text-lg hover:bg-slate-50 transition-all duration-300 group"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Learn More
-                    <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
-                  </motion.a>
-                </motion.div>
-              </motion.div>
-
-              {/* Image */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-                className="relative hidden md:block"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-teal-200 to-cyan-200 rounded-2xl blur-3xl opacity-20" />
-                <img
-                  src="/assets/hero/healthier.png"
-                  alt="Fitness App Preview"
-                  className="relative z-10 w-full rounded-2xl shadow-2xl"
-                />
-              </motion.div>
-            </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-dark-secondary dark:via-dark-primary dark:to-dark-secondary flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-[0.015] pointer-events-none" />
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white dark:bg-dark-secondary rounded-2xl shadow-xl p-8 w-full max-w-md relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-50 dark:from-teal-900/20 to-transparent opacity-50" />
+        <div className="relative z-10">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
+              {isLogin ? 'Welcome Back!' : 'Create Account'}
+            </h1>
+            <p className="text-slate-600 dark:text-slate-400">
+              {isLogin 
+                ? 'Enter your credentials to access your account'
+                : 'Join us and start your fitness journey today'}
+            </p>
           </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Email Address
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                  <FaEnvelope />
+                </span>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 focus:border-teal-500 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 dark:bg-dark-accent dark:text-white"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                Password
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                  <FaLock />
+                </span>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 dark:border-slate-600 focus:border-teal-500 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 dark:bg-dark-accent dark:text-white"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+
+            {isLogin && (
+              <div className="flex items-center justify-between text-sm">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="rounded border-slate-300 dark:border-slate-600 text-teal-600 focus:ring-teal-500 dark:focus:ring-teal-400"
+                  />
+                  <span className="ml-2 text-slate-600 dark:text-slate-400">Remember me</span>
+                </label>
+                <a
+                  href="#"
+                  className="text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300"
+                >
+                  Forgot password?
+                </a>
+              </div>
+            )}
+
+            <motion.button
+              type="submit"
+              className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-500 transition-colors duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {isLogin ? 'Sign In' : 'Create Account'}
+            </motion.button>
+          </form>
+
+          <div className="my-6 flex items-center justify-center">
+            <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
+            <span className="px-4 text-sm text-slate-500 dark:text-slate-400">Or continue with</span>
+            <div className="flex-1 h-px bg-slate-200 dark:bg-slate-700" />
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { icon: <FaGoogle />, label: 'Google', color: 'text-red-600 dark:text-red-500' },
+              { icon: <FaFacebook />, label: 'Facebook', color: 'text-blue-600 dark:text-blue-500' },
+              { icon: <FaGithub />, label: 'GitHub', color: 'text-slate-900 dark:text-white' }
+            ].map((provider) => (
+              <motion.button
+                key={provider.label}
+                className="flex items-center justify-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-dark-accent transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className={provider.color}>{provider.icon}</span>
+              </motion.button>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
+            {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
+            <button
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300 font-medium"
+            >
+              {isLogin ? 'Sign up' : 'Sign in'}
+            </button>
+          </p>
         </div>
-      </section>
+      </motion.div>
     </div>
   );
-}
+};
 
 export default Login;

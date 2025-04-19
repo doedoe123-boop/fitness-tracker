@@ -1,12 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         brand: {
           primary: {
-            DEFAULT: '#0D9488', // teal-600
+            DEFAULT: '#0D9488',
             50: '#F0FDFA',
             100: '#CCFBF1',
             200: '#99F6E4',
@@ -20,7 +24,7 @@ export default {
             950: '#042F2E',
           },
           secondary: {
-            DEFAULT: '#0891B2', // cyan-600
+            DEFAULT: '#0891B2',
             50: '#ECFEFF',
             100: '#CFFAFE',
             200: '#A5F3FC',
@@ -34,6 +38,18 @@ export default {
             950: '#083344',
           },
         },
+        dark: {
+          primary: '#1a1b1e',
+          secondary: '#25262b',
+          accent: '#2C2E33'
+        }
+      },
+      ringOffsetColor: {
+        dark: {
+          primary: '#1a1b1e',
+          secondary: '#25262b',
+          accent: '#2C2E33'
+        }
       },
       fontFamily: {
         sans: ['Inter var', 'sans-serif'],
@@ -77,6 +93,7 @@ export default {
       },
       backgroundImage: {
         'grid-pattern': 'linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(0,0,0,0.1) 1px, transparent 1px)',
+        'grid-pattern-dark': 'linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
         'hero-pattern': "url('/assets/hero/healthier.png')",
       },
       backgroundSize: {
@@ -88,4 +105,4 @@ export default {
     },
   },
   plugins: [],
-};
+}

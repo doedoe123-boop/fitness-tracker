@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { exerciseCategories } from "../data/exercises";
 import WorkoutHistory, { WorkoutSession } from "./WorkoutHistory";
 import { FitnessGoal } from "./FitnessGoals";
 
-const BodyExercise: React.FC = () => {
+interface BodyExerciseProps {
+  exercises: string[];
+  category: string;
+}
+
+const BodyExercise: React.FC<BodyExerciseProps> = ({ exercises, category }) => {
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
   const [poppingText, setPoppingText] = useState<string | null>(null);
   const [duration, setDuration] = useState(0);
@@ -140,42 +144,39 @@ const BodyExercise: React.FC = () => {
 
   return (
     <div className="font-sans">
-      {/* Exercise Categories */}
+      {/* Exercise Category */}
       <div className="space-y-12">
-        {exerciseCategories.map((category, index) => (
-          <motion.div
-            key={index}
-            className="exercise-category"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.3 },
-              },
-            }}
-          >
-            <h2 className="text-2xl font-bold mb-6 text-slate-900">{category.category}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {category.exercises.map((exercise, idx) => (
-                <motion.div
-                  key={idx}
-                  className="exercise-item bg-white p-6 rounded-xl shadow-sm hover:shadow-xl cursor-pointer transition-all duration-300 border border-slate-100 group"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  onClick={() => handleExerciseClick(exercise)}
-                  whileHover={{ y: -5 }}
-                >
-                  <span className="text-lg font-medium text-slate-900">{exercise}</span>
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+        <motion.div
+          className="exercise-category"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.3 },
+            },
+          }}
+        >
+          <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">{category}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {exercises.map((exercise, idx) => (
+              <motion.div
+                key={idx}
+                className="exercise-item bg-white dark:bg-dark-secondary p-6 rounded-xl shadow-sm hover:shadow-xl cursor-pointer transition-all duration-300 border border-slate-100 dark:border-slate-700 group"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                onClick={() => handleExerciseClick(exercise)}
+                whileHover={{ y: -5 }}
+              >
+                <span className="text-lg font-medium text-slate-900 dark:text-white">{exercise}</span>
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* Selected Exercise Display */}
@@ -186,7 +187,7 @@ const BodyExercise: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="text-2xl font-bold mb-8 text-slate-900">
+          <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">
             Now Performing: <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">{selectedExercise}</span>
           </h3>
 
@@ -204,7 +205,7 @@ const BodyExercise: React.FC = () => {
             </motion.button>
             {isWorkoutActive && (
               <motion.button
-                className="px-6 py-3 rounded-lg font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 transition-all duration-300"
+                className="px-6 py-3 rounded-lg font-medium text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-dark-secondary hover:bg-slate-200 dark:hover:bg-dark-accent transition-all duration-300"
                 onClick={() => {
                   setDuration(0);
                   setCalories(0);
@@ -219,13 +220,13 @@ const BodyExercise: React.FC = () => {
 
           {/* Workout Stats */}
           <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-8">
-            <div className="bg-slate-50 p-4 rounded-lg">
-              <p className="text-sm text-slate-600 mb-1">Duration</p>
-              <p className="text-2xl font-bold text-slate-900">{formatTime(duration)}</p>
+            <div className="bg-slate-50 dark:bg-dark-secondary p-4 rounded-lg">
+              <p className="text-sm text-slate-600 dark:text-slate-300 mb-1">Duration</p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">{formatTime(duration)}</p>
             </div>
-            <div className="bg-slate-50 p-4 rounded-lg">
-              <p className="text-sm text-slate-600 mb-1">Calories Burned</p>
-              <p className="text-2xl font-bold text-slate-900">{Math.round(calories)}</p>
+            <div className="bg-slate-50 dark:bg-dark-secondary p-4 rounded-lg">
+              <p className="text-sm text-slate-600 dark:text-slate-300 mb-1">Calories Burned</p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">{Math.round(calories)}</p>
             </div>
           </div>
 
@@ -245,7 +246,7 @@ const BodyExercise: React.FC = () => {
                 />
               </motion.div>
             ) : (
-              <div className="text-slate-500">No media available</div>
+              <div className="text-slate-500 dark:text-slate-400">No media available</div>
             )}
           </div>
         </motion.div>
@@ -257,7 +258,7 @@ const BodyExercise: React.FC = () => {
       {/* Motivational Popup */}
       {poppingText && (
         <motion.div
-          className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-white px-8 py-4 rounded-xl shadow-2xl border border-slate-100 text-slate-900 font-medium"
+          className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-white dark:bg-dark-secondary px-8 py-4 rounded-xl shadow-2xl border border-slate-100 dark:border-slate-700 text-slate-900 dark:text-white font-medium"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
@@ -274,7 +275,7 @@ const BodyExercise: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <p className="text-lg text-slate-600 italic">
+        <p className="text-lg text-slate-600 dark:text-slate-300 italic">
           "The body achieves what the mind believes. Keep pushing, and you'll reach your goals! 💫"
         </p>
       </motion.div>

@@ -7,4 +7,7 @@ export default defineConfig({
     port: 3000, // Specify your desired port
   },
   plugins: [react()],
+  css: {
+    postcss: './postcss.config.js',
+  },
 })
