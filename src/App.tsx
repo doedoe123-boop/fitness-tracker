@@ -14,7 +14,8 @@ import DietTips from "./pages/DietTips";
 import WorkOutNow from "./pages/WorkoutNow";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Login from "./pages/auth/Login";
+import Registration from "./pages/auth/Registration";
+import ThankYou from "./pages/auth/ThankYou";
 import NotFound from "./pages/NotFound";
 import FeatureHighlight from "./pages/components/FeatureHighlight";
 
@@ -27,6 +28,7 @@ function DynamicTitle() {
       "/": "Home - Fitness Tracker",
       "/about": "About - Fitness Tracker",
       "/sign-up": "Sign up - Fitness Tracker",
+      "/thank-you": "Registration Success - Fitness Tracker",
       "/health-importance": "Health Importance - Fitness Tracker",
       "/fitness-tips": "Fitness Tips - Fitness Tracker",
       "/diet-tips": "Diet Tips - Fitness Tracker",
@@ -53,7 +55,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/sign-up" element={<Login />} />
+              <Route path="/sign-up" element={<Registration />} />
+              <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/health-importance" element={<HealthImportance />} />
               <Route path="/fitness-tips" element={<FitnessTips />} />
               <Route path="/diet-tips" element={<DietTips />} />
