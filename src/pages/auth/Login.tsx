@@ -1,15 +1,36 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from '../../utils/supabaseClient';
+import { useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa';
 
 const Login: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle authentication logic here
+    setError('');
+
+    if (isLogin) {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        setError(error.message);
+      } else {
+        navigate('/dashboard');
+      }
+    } else {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        setError(error.message);
+      } else {
+        alert('Check your email for confirmation link');
+        setIsLogin(true);
+      }
+    }
   };
 
   return (
@@ -99,6 +120,9 @@ const Login: React.FC = () => {
             >
               {isLogin ? 'Sign In' : 'Create Account'}
             </motion.button>
+            {error && (
+              <p className="text-sm text-red-500 text-center">{error}</p>
+            )}
           </form>
 
           <div className="my-6 flex items-center justify-center">
@@ -108,20 +132,21 @@ const Login: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-4">
-            {[
-              { icon: <FaGoogle />, label: 'Google', color: 'text-red-600 dark:text-red-500' },
-              { icon: <FaFacebook />, label: 'Facebook', color: 'text-blue-600 dark:text-blue-500' },
-              { icon: <FaGithub />, label: 'GitHub', color: 'text-slate-900 dark:text-white' }
-            ].map((provider) => (
-              <motion.button
-                key={provider.label}
-                className="flex items-center justify-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-dark-accent transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className={provider.color}>{provider.icon}</span>
-              </motion.button>
-            ))}
+          {[
+          { icon: <FaGoogle />, label: 'Google', color: 'text-red-600 dark:text-red-500' },
+          { icon: <FaFacebook />, label: 'Facebook', color: 'text-blue-600 dark:text-blue-500' },
+          { icon: <FaGithub />, label: 'GitHub', color: 'text-slate-900 dark:text-white' }
+        ].map((provider) => (
+          <motion.button
+            key={provider.label}
+            onClick={() => alert(`${provider.label} login coming soon! Stay tuned.`)}
+            className="flex items-center justify-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-dark-accent transition-colors"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className={provider.color}>{provider.icon}</span>
+          </motion.button>
+        ))}
           </div>
 
           <p className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
