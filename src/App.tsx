@@ -21,6 +21,7 @@ import ThankYou from "./pages/auth/ThankYou";
 import NotFound from "./pages/NotFound";
 import FeatureHighlight from "./pages/components/FeatureHighlight";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
+import RedirectIfAuthenticated from "./pages/auth/RedirectIfAuthenticated";
 import Dashboard from "./pages/protected/Dashboard";
 
 // Component to manage the dynamic page title
@@ -53,19 +54,21 @@ function App() {
     <ThemeProvider>
       <Router>
         <DynamicTitle />
-
         <Routes>
-          {/* Public Layout */}
+
+          {/* Public Layout with redirect protection */}
           <Route
             element={
-              <div className="flex flex-col min-h-screen bg-white dark:bg-dark-primary text-slate-800 dark:text-slate-200">
-                <Navigation />
-                <main className="flex-1">
-                  <Outlet />
-                </main>
-                <FeatureHighlight />
-                <Footer />
-              </div>
+              <RedirectIfAuthenticated>
+                <div className="flex flex-col min-h-screen bg-white dark:bg-dark-primary text-slate-800 dark:text-slate-200">
+                  <Navigation />
+                  <main className="flex-1">
+                    <Outlet />
+                  </main>
+                  <FeatureHighlight />
+                  <Footer />
+                </div>
+              </RedirectIfAuthenticated>
             }
           >
             <Route path="/" element={<Home />} />
@@ -84,13 +87,13 @@ function App() {
             element={
               <ProtectedRoute>
                 <div className="min-h-screen bg-slate-50 dark:bg-dark-primary text-slate-900 dark:text-slate-200">
-                  {/* Optional: Protected Nav or Sidebar here */}
                   <Outlet />
                 </div>
               </ProtectedRoute>
             }
           >
             <Route path="/dashboard" element={<Dashboard />} />
+            {/* Add more protected routes here */}
           </Route>
 
           {/* Not found */}
@@ -100,6 +103,7 @@ function App() {
     </ThemeProvider>
   );
 }
+
 
 
 export default App;
