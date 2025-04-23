@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '../../utils/supabaseClient';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa';
 
 const Login: React.FC = () => {
@@ -150,13 +150,13 @@ const Login: React.FC = () => {
           </div>
 
           <p className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
-            {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
-            <button
-              onClick={() => setIsLogin(!isLogin)}
+            Don't have an account? {' '}
+           <Link
+              to="/sign-up"
               className="text-teal-600 hover:text-teal-500 dark:text-teal-400 dark:hover:text-teal-300 font-medium"
             >
-              {isLogin ? 'Sign up' : 'Sign in'}
-            </button>
+              Sign up
+            </Link>
           </p>
         </div>
       </motion.div>
