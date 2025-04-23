@@ -1,0 +1,3 @@
+Sitemap: https://www.fitnesses.lifestyle/sitemap.xml
+User-agent: *
+Allow: /
