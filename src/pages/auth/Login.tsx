@@ -71,10 +71,12 @@ const Login: React.FC = () => {
   ] as const;
   
   const socialLogin = async (provider: OAuthProvider) => {
+    const redirectTo = import.meta.env.VITE_SUPABASE_REDIRECT_URL;
+  
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${location.origin}/dashboard`,
+        redirectTo,
       },
     });
   
@@ -84,7 +86,7 @@ const Login: React.FC = () => {
     }
   
     console.log(`${provider} login successful!`);
-  };
+  };  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-dark-secondary dark:via-dark-primary dark:to-dark-secondary flex items-center justify-center p-4">
