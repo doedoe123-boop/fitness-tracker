@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '../../utils/supabaseClient';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaEnvelope, FaLock, FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa';
+import googleLogo from '../../../public/assets/social/google.svg'
+import facebookLogo from '../../../public/assets/social/facebook.svg'
+import githubLogo from '../../../public/assets/social/github.svg'
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 
 const Login: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -31,6 +34,56 @@ const Login: React.FC = () => {
         setIsLogin(true);
       }
     }
+  };
+
+  type Provider = {
+    icon: JSX.Element;
+    label: string;
+    provider: OAuthProvider;
+    color: string;
+    disabled?: boolean;
+  };
+  
+
+  type OAuthProvider = 'google' | 'facebook' | 'github';
+
+  const providers: Provider[] = [
+    {
+      icon: <img src={googleLogo} alt="Google" className="w-6 h-6" />,
+      label: 'Google',
+      provider: 'google',
+      color: 'text-red-600 dark:text-red-500',
+    },
+    {
+      icon: <img src={facebookLogo} alt="Google" className="w-6 h-6" />,
+      label: 'Google',
+      provider: 'google',
+      color: 'text-blue-600 dark:text-blue-500',
+      disabled: true,
+    },
+    {
+      icon: <img src={githubLogo} alt="Google" className="w-6 h-6" />,
+      label: 'Google',
+      provider: 'google',
+      color: 'text-slate-900 dark:text-white',
+      disabled: true,
+    }
+  ] as const;
+  
+  const socialLogin = async (provider: OAuthProvider) => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${location.origin}/dashboard`,
+      },
+    });
+  
+    if (error) {
+      console.error(`${provider} login error:`, error.message);
+      return;
+    }
+  
+    console.log(`${provider} login successful!`);
   };
 
   return (
@@ -132,21 +185,18 @@ const Login: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-3 gap-4">
-          {[
-          { icon: <FaGoogle />, label: 'Google', color: 'text-red-600 dark:text-red-500' },
-          { icon: <FaFacebook />, label: 'Facebook', color: 'text-blue-600 dark:text-blue-500' },
-          { icon: <FaGithub />, label: 'GitHub', color: 'text-slate-900 dark:text-white' }
-        ].map((provider) => (
-          <motion.button
-            key={provider.label}
-            onClick={() => alert(`${provider.label} login coming soon! Stay tuned.`)}
-            className="flex items-center justify-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-dark-accent transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className={provider.color}>{provider.icon}</span>
-          </motion.button>
-        ))}
+            {providers.map((provider) => (
+                <motion.button
+                key={provider.label}
+                onClick={!provider.disabled ? () => socialLogin(provider.provider) : undefined} 
+                className={`flex items-center justify-center p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-dark-accent transition-colors ${provider.disabled ? 'cursor-not-allowed opacity-50' : ''}`} // Apply styles to disable button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                disabled={provider.disabled}
+              >
+                <span className={provider.color}>{provider.icon}</span>
+              </motion.button>
+            ))}
           </div>
 
           <p className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
