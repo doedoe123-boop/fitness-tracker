@@ -113,7 +113,7 @@ function Home() {
         </motion.div>
 
         {/* Demo Video Modal - US002 */}
-        {/* {showVideo && (
+        {showVideo && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -140,7 +140,7 @@ function Home() {
               />
             </motion.div>
           </motion.div>
-        )} */}
+        )}
       </section>
 
       {/* What's New Section */}
