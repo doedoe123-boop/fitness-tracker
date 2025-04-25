@@ -19,9 +19,9 @@ function Footer() {
       { label: 'Blog', path: '/blog' },
     ],
     legal: [
-      { label: 'Privacy', path: '/privacy' },
-      { label: 'Terms', path: '/terms' },
-      { label: 'License', path: '/license' },
+      { label: 'Privacy', path: '/privacy-policy' },
+      { label: 'Terms', path: '/terms-of-service' },
+      { label: 'License', path: '#' },
     ],
     social: [
       { label: 'GitHub', icon: <FaGithub />, url: 'https://github.com' },
