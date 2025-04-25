@@ -56,17 +56,16 @@ const Login: React.FC = () => {
     },
     {
       icon: <img src={facebookLogo} alt="Google" className="w-6 h-6" />,
-      label: 'Google',
-      provider: 'google',
+      label: 'Facebook',
+      provider: 'facebook',
       color: 'text-blue-600 dark:text-blue-500',
       disabled: true,
     },
     {
       icon: <img src={githubLogo} alt="Google" className="w-6 h-6" />,
-      label: 'Google',
-      provider: 'google',
+      label: 'Github',
+      provider: 'github',
       color: 'text-slate-900 dark:text-white',
-      disabled: true,
     }
   ] as const;
   
