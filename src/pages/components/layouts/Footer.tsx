@@ -7,8 +7,8 @@ function Footer() {
 
   const footerLinks = {
     product: [
-      { label: 'Features', path: '/#features' },
-      { label: 'Pricing', path: '/pricing' },
+      { label: 'Features', path: '#' },
+      { label: 'Pricing', path: '#' },
       { label: 'Download', path: '/download' },
       { label: 'About', path: '/about' },
     ],

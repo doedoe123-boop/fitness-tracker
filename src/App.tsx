@@ -25,6 +25,7 @@ import RedirectIfAuthenticated from "./pages/auth/RedirectIfAuthenticated";
 import Dashboard from "./pages/protected/Dashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsAndService";
+import Blog from "./pages/HealthNews";
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -43,6 +44,7 @@ function DynamicTitle() {
       "/work-out-now": "Work out Now - Fitness Tracker",
       "/privacy-policy": "Privacy Policy - Fitness Tracker",
       "/terms-of-service": "Terms of Service - Fitness Tracker",
+      "/blog": "Blog - Fitness Tracker",
     };
 
     document.title =
@@ -83,6 +85,7 @@ function App() {
             <Route path="/health-importance" element={<HealthImportance />} />
             <Route path="/fitness-tips" element={<FitnessTips />} />
             <Route path="/diet-tips" element={<DietTips />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/work-out-now" element={<WorkOutNow />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
