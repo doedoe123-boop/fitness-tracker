@@ -105,7 +105,7 @@ function Home() {
           <div className="relative max-w-lg">
             <div className="absolute inset-0 bg-gradient-to-r from-teal-200 to-cyan-200 rounded-2xl blur-3xl opacity-20" />
             <img
-              src="/assets/hero/healthier.png"
+              src="src/assets/hero/healthier.png"
               alt="Fitness App Interface"
               className="relative z-10 w-full rounded-2xl shadow-2xl"
             />
@@ -254,9 +254,9 @@ function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { src: "/assets/exercises/running.gif", title: "Workout Tracking" },
-              { src: "/assets/exercises/yoga.gif", title: "Guided Exercises" },
-              { src: "/assets/exercises/push-ups.gif", title: "Form Guidance" }
+              { src: "src/assets/exercises/running.gif", title: "Workout Tracking" },
+              { src: "src/assets/exercises/yoga.gif", title: "Guided Exercises" },
+              { src: "src/assets/exercises/push-ups.gif", title: "Form Guidance" }
             ].map((screenshot, index) => (
               <motion.div
                 key={index}
@@ -283,7 +283,7 @@ function Home() {
 
       {/* Waitlist Section - US003 */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/assets/hero/healthier.png')] opacity-5 bg-cover bg-center mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('src/assets/hero/healthier.png')] opacity-5 bg-cover bg-center mix-blend-overlay" />
         <div className="container mx-auto px-6 max-w-4xl relative z-10">
           <motion.div
             className="text-center"
@@ -412,13 +412,13 @@ function Home() {
                 name: "Sarah J.",
                 achievement: "Lost 30lbs in 6 months",
                 story: "Following the workout plans and nutrition guides helped me achieve my weight loss goals. The community support was incredible!",
-                image: "/assets/testimonial/1.jpg"
+                image: "src/assets/testimonial/1.jpg"
               },
               {
                 name: "Shen R.",
                 achievement: "Gained muscle mass",
                 story: "The personalized strength training programs helped me build the muscle I always wanted. The progress tracking kept me motivated.",
-                image: "/assets/testimonial/2.jpg"
+                image: "src/assets/testimonial/2.jpg"
               }
             ].map((story, index) => (
               <motion.div
@@ -572,7 +572,7 @@ function Home() {
 
       {/* Call to Action */}
       <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/public/assets/hero/healthier.png')] opacity-5 bg-cover bg-center mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[url('/publicsrc/assets/hero/healthier.png')] opacity-5 bg-cover bg-center mix-blend-overlay" />
         <div className="container mx-auto px-6 max-w-4xl relative z-10">
           <div className="text-center">
             <motion.h2

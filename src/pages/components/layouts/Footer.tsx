@@ -9,7 +9,7 @@ function Footer() {
     product: [
       { label: 'Features', path: '#' },
       { label: 'Pricing', path: '#' },
-      { label: 'Download', path: '/download' },
+      { label: 'Download', path: '#' },
       { label: 'About', path: '/about' },
     ],
     resources: [

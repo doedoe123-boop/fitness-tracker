@@ -17,7 +17,7 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: "Sarah Johnson",
     role: "Fitness Enthusiast",
-    avatar: "/assets/testimonial/1.jpg",
+    avatar: "src/assets/testimonial/1.jpg",
     comment: "The AI-powered workout recommendations have completely transformed my fitness journey. I've seen more progress in 3 months than I did in a year of working out on my own.",
     rating: 5,
     achievement: "Lost 30 lbs in 3 months"
@@ -26,7 +26,7 @@ const testimonials: Testimonial[] = [
     id: 2,
     name: "Michael Chen",
     role: "Software Developer",
-    avatar: "/assets/testimonial/4.jpg",
+    avatar: "src/assets/testimonial/4.jpg",
     comment: "As someone with a busy schedule, the flexible workout plans and progress tracking features have made it easy to stay consistent with my fitness goals.",
     rating: 5,
     achievement: "Gained 15 lbs muscle mass"
@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Emily Rodriguez",
     role: "Marathon Runner",
-    avatar: "/assets/testimonial/2.jpg",
+    avatar: "src/assets/testimonial/2.jpg",
     comment: "The nutrition guidance and workout tracking have helped me optimize my training. I've improved my marathon time by 15 minutes!",
     rating: 5,
     achievement: "Improved endurance by 40%"

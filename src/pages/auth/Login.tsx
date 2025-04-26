@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { supabase } from '../../utils/supabaseClient';
 import { Link, useNavigate } from 'react-router-dom';
-import googleLogo from '../../../public/assets/social/google.svg'
-import facebookLogo from '../../../public/assets/social/facebook.svg'
-import githubLogo from '../../../public/assets/social/github.svg'
+import googleLogo from '../../../src/assets/social/google.svg'
+import facebookLogo from '../../../src/assets/social/facebook.svg'
+import githubLogo from '../../../src/assets/social/github.svg'
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 
 const Login: React.FC = () => {

@@ -131,15 +131,15 @@ const BodyExercise: React.FC<BodyExerciseProps> = ({ exercises, category }) => {
   };
 
   const exerciseMedia: { [key: string]: string } = {
-    Running: "/assets/exercises/running.gif",
-    "Jumping Jacks": "/assets/exercises/rope.gif",
-    Cycling: "/assets/exercises/cycling.gif",
-    "Push-ups": "/assets/exercises/push-ups.gif",
-    Squats: "/assets/exercises/squats.gif",
-    Lunges: "/assets/exercises/lunges.gif",
-    Yoga: "/assets/exercises/yoga.gif",
-    Stretching: "/assets/exercises/stretching.gif",
-    Pilates: "/assets/exercises/pilates.gif",
+    Running: "src/assets/exercises/running.gif",
+    "Jumping Jacks": "src/assets/exercises/rope.gif",
+    Cycling: "src/assets/exercises/cycling.gif",
+    "Push-ups": "src/assets/exercises/push-ups.gif",
+    Squats: "src/assets/exercises/squats.gif",
+    Lunges: "src/assets/exercises/lunges.gif",
+    Yoga: "src/assets/exercises/yoga.gif",
+    Stretching: "src/assets/exercises/stretching.gif",
+    Pilates: "src/assets/exercises/pilates.gif",
   };
 
   return (

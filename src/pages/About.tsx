@@ -29,7 +29,7 @@ const team = [
   {
     name: 'Alex Thompson',
     role: 'Lead Developer',
-    image: '/assets/team/1.jpg',
+    image: 'src/assets/team/1.jpg',
     social: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -39,7 +39,7 @@ const team = [
   {
     name: 'Sarah Chen',
     role: 'UI/UX Designer',
-    image: '/assets/team/2.jpg',
+    image: 'src/assets/team/2.jpg',
     social: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -49,7 +49,7 @@ const team = [
   {
     name: 'Marcus Rodriguez',
     role: 'Fitness Expert',
-    image: '/assets/team/3.jpg',
+    image: 'src/assets/team/3.jpg',
     social: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
