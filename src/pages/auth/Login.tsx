@@ -70,7 +70,7 @@ const Login: React.FC = () => {
   ] as const;
   
   const socialLogin = async (provider: OAuthProvider) => {
-    const redirectTo = import.meta.env.VITE_SUPABASE_REDIRECT_URL;
+    const redirectTo = import.meta.env.VITE_REDIRECT_URL;
   
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
