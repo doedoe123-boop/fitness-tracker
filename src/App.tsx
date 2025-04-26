@@ -26,8 +26,9 @@ import Dashboard from "./pages/protected/Dashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsAndService";
 import News from "./pages/HealthNews";
-import { SpeedInsights } from "@vercel/speed-insights/react"
-import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
+import Workouts from "./pages/protected/Workouts";
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -47,6 +48,9 @@ function DynamicTitle() {
       "/privacy-policy": "Privacy Policy - Fitness Tracker",
       "/terms-of-service": "Terms of Service - Fitness Tracker",
       "/news": "News - Fitness Tracker",
+      "/dashboard": "Dashboard - Fitness Tracker",
+      "/workouts": "Workouts - Fitness Tracker",
+      "/workouts/:id": "Workout Details - Fitness Tracker",
     };
 
     document.title =
@@ -104,7 +108,7 @@ function App() {
             }
           >
             <Route path="/dashboard" element={<Dashboard />} />
-            {/* Add more protected routes here */}
+            <Route path="/workouts" element={<Workouts />} />
           </Route>
 
           {/* Not found */}
