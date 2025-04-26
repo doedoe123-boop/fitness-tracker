@@ -2,6 +2,12 @@ import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, 
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Testimonials from './components/Testimonials';
+import Testimonial1 from "../assets/testimonial/1.jpg";
+import Testimonial2 from "../assets/testimonial/2.jpg";
+import Running from "../assets/exercises/running.gif";
+import Yoga from "../assets/exercises/yoga.gif";
+import PushUp from "../assets/exercises/push-ups.gif";
+import Healthier from "../assets/hero/healthier.png";
 
 function Home() {
   const [showVideo, setShowVideo] = useState(false);
@@ -105,7 +111,7 @@ function Home() {
           <div className="relative max-w-lg">
             <div className="absolute inset-0 bg-gradient-to-r from-teal-200 to-cyan-200 rounded-2xl blur-3xl opacity-20" />
             <img
-              src="src/assets/hero/healthier.png"
+              src={Healthier}
               alt="Fitness App Interface"
               className="relative z-10 w-full rounded-2xl shadow-2xl"
             />
@@ -254,9 +260,9 @@ function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { src: "src/assets/exercises/running.gif", title: "Workout Tracking" },
-              { src: "src/assets/exercises/yoga.gif", title: "Guided Exercises" },
-              { src: "src/assets/exercises/push-ups.gif", title: "Form Guidance" }
+              { src: Running, title: "Workout Tracking" },
+              { src: Yoga, title: "Guided Exercises" },
+              { src: PushUp, title: "Form Guidance" }
             ].map((screenshot, index) => (
               <motion.div
                 key={index}
@@ -412,13 +418,13 @@ function Home() {
                 name: "Sarah J.",
                 achievement: "Lost 30lbs in 6 months",
                 story: "Following the workout plans and nutrition guides helped me achieve my weight loss goals. The community support was incredible!",
-                image: "src/assets/testimonial/1.jpg"
+                image: Testimonial1
               },
               {
                 name: "Shen R.",
                 achievement: "Gained muscle mass",
                 story: "The personalized strength training programs helped me build the muscle I always wanted. The progress tracking kept me motivated.",
-                image: "src/assets/testimonial/2.jpg"
+                image: Testimonial2
               }
             ].map((story, index) => (
               <motion.div

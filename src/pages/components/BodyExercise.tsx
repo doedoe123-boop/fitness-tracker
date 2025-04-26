@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import WorkoutHistory, { WorkoutSession } from "./WorkoutHistory";
 import { FitnessGoal } from "./FitnessGoals";
-
+import Running from "../../assets/exercises/running.gif";
+import Yoga from "../../assets/exercises/yoga.gif";
+import PushUp from "../../assets/exercises/push-ups.gif";
+import Cycling from "../../assets/exercises/cycling.gif";
+import Squats from "../../assets/exercises/squats.gif";
+import Lunges from "../../assets/exercises/lunges.gif";
+import Stretching from "../../assets/exercises/stretching.gif";
+import Pilates from "../../assets/exercises/pilates.gif";
+import JumpingJacks from "../../assets/exercises/rope.gif";
 interface BodyExerciseProps {
   exercises: string[];
   category: string;
@@ -131,15 +139,15 @@ const BodyExercise: React.FC<BodyExerciseProps> = ({ exercises, category }) => {
   };
 
   const exerciseMedia: { [key: string]: string } = {
-    Running: "src/assets/exercises/running.gif",
-    "Jumping Jacks": "src/assets/exercises/rope.gif",
-    Cycling: "src/assets/exercises/cycling.gif",
-    "Push-ups": "src/assets/exercises/push-ups.gif",
-    Squats: "src/assets/exercises/squats.gif",
-    Lunges: "src/assets/exercises/lunges.gif",
-    Yoga: "src/assets/exercises/yoga.gif",
-    Stretching: "src/assets/exercises/stretching.gif",
-    Pilates: "src/assets/exercises/pilates.gif",
+    Running: Running,
+    "Jumping Jacks": JumpingJacks,
+    Cycling: Cycling,
+    "Push-ups": PushUp,
+    Squats: Squats,
+    Lunges: Lunges,
+    Yoga: Yoga,
+    Stretching: Stretching,
+    Pilates: Pilates,
   };
 
   return (

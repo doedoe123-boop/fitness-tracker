@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaTwitter, FaHeart, FaCode, FaDumbbell, FaBrain, FaUsers, FaMobileAlt } from 'react-icons/fa';
+import Team1 from "../assets/team/1.jpg";
+import Team2 from "../assets/team/2.jpg";
+import Team3 from "../assets/team/3.jpg";
 
 const features = [
   {
@@ -29,7 +32,7 @@ const team = [
   {
     name: 'Alex Thompson',
     role: 'Lead Developer',
-    image: 'src/assets/team/1.jpg',
+    image: Team1,
     social: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -39,7 +42,7 @@ const team = [
   {
     name: 'Sarah Chen',
     role: 'UI/UX Designer',
-    image: 'src/assets/team/2.jpg',
+    image: Team2,
     social: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -49,7 +52,7 @@ const team = [
   {
     name: 'Marcus Rodriguez',
     role: 'Fitness Expert',
-    image: 'src/assets/team/3.jpg',
+    image: Team3,
     social: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',

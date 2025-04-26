@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaQuoteLeft, FaStar } from 'react-icons/fa';
+import Testimonial1 from "../../assets/testimonial/1.jpg";
+import Testimonial2 from "../../assets/testimonial/2.jpg";
+import Testimonial4 from "../../assets/testimonial/4.jpg";
+
 
 interface Testimonial {
   id: number;
@@ -17,7 +21,7 @@ const testimonials: Testimonial[] = [
     id: 1,
     name: "Sarah Johnson",
     role: "Fitness Enthusiast",
-    avatar: "src/assets/testimonial/1.jpg",
+    avatar: Testimonial1,
     comment: "The AI-powered workout recommendations have completely transformed my fitness journey. I've seen more progress in 3 months than I did in a year of working out on my own.",
     rating: 5,
     achievement: "Lost 30 lbs in 3 months"
@@ -26,7 +30,7 @@ const testimonials: Testimonial[] = [
     id: 2,
     name: "Michael Chen",
     role: "Software Developer",
-    avatar: "src/assets/testimonial/4.jpg",
+    avatar: Testimonial4,
     comment: "As someone with a busy schedule, the flexible workout plans and progress tracking features have made it easy to stay consistent with my fitness goals.",
     rating: 5,
     achievement: "Gained 15 lbs muscle mass"
@@ -35,7 +39,7 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Emily Rodriguez",
     role: "Marathon Runner",
-    avatar: "src/assets/testimonial/2.jpg",
+    avatar: Testimonial2,
     comment: "The nutrition guidance and workout tracking have helped me optimize my training. I've improved my marathon time by 15 minutes!",
     rating: 5,
     achievement: "Improved endurance by 40%"
