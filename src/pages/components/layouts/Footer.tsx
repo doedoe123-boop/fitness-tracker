@@ -16,7 +16,7 @@ function Footer() {
       { label: 'Health Tips', path: '/health-importance' },
       { label: 'Fitness Guide', path: '/fitness-tips' },
       { label: 'Diet Tips', path: '/diet-tips' },
-      { label: 'Blog', path: '/blog' },
+      { label: 'News', path: '/news' },
     ],
     legal: [
       { label: 'Privacy', path: '/privacy-policy' },

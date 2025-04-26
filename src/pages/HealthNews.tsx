@@ -6,7 +6,17 @@ const HealthNews: React.FC = () => {
 
   return (
     <div className="min-h-screen p-6 bg-slate-50 dark:bg-dark-primary text-slate-800 dark:text-white pt-24">
-      <h1 className="text-3xl font-bold mb-4 text-center">📰 Health & Fitness News</h1>
+      <div className="max-w-4xl mx-auto text-center mb-8">
+        <h1 className="text-3xl font-bold mb-4">📰 Health & Fitness News</h1>
+        <p className="text-lg mb-6">Stay informed with the latest updates in health, wellness, nutrition, and fitness</p>
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <span className="px-4 py-2 bg-blue-100 dark:bg-blue-900 rounded-full text-sm">🏃 Fitness Tips</span>
+          <span className="px-4 py-2 bg-green-100 dark:bg-green-900 rounded-full text-sm">🥗 Nutrition</span>
+          <span className="px-4 py-2 bg-purple-100 dark:bg-purple-900 rounded-full text-sm">🧘 Mental Wellness</span>
+          <span className="px-4 py-2 bg-orange-100 dark:bg-orange-900 rounded-full text-sm">💪 Exercise Science</span>
+        </div>
+      </div>
+      
       {loading ? (
         <p className="text-center">Loading news...</p>
       ) : (
