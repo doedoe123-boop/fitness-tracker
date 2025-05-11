@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
       {/* Dashboard Grid */}
       <div className="p-4 md:p-8 space-y-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 dark:border-blue-900">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">Calories Burned</h3>

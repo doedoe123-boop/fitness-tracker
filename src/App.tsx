@@ -33,6 +33,8 @@ import { SidebarProvider } from './pages/components/SidebarProvider';
 import ProtectedLayout from './pages/protected/layouts/ProtectedLayout';
 import ExerciseDetails from './pages/protected/ExerciseDetails/page';
 import Profile from './pages/protected/Profile';
+import Settings from "./pages/protected/Settings";
+import History from "./pages/protected/History";
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -55,6 +57,9 @@ function DynamicTitle() {
       "/dashboard": "Dashboard - Fitness Tracker",
       "/workouts": "Workouts - Fitness Tracker",
       "/workouts/:id": "Workout Details - Fitness Tracker",
+      "/history": "Workout History - Fitness Tracker",
+      "/profile": "Profile - Fitness Tracker",
+      "/settings": "Settings - Fitness Tracker"
     };
 
     document.title =
@@ -114,7 +119,9 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/workouts" element={<Workouts />} />
             <Route path="/workouts/:id" element={<ExerciseDetails />} />
+            <Route path="/history" element={<History />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           {/* Not found */}
