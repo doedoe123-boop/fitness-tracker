@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBell, FaUserCircle, FaChevronDown, FaCog, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { supabase } from "../../../utils/supabaseClient";
-import { ThemeToggle } from "../ThemeToggle";
+import { ThemeToggle } from "../../components/ThemeToggle";
 
 const DashboardNav: React.FC<{ userEmail?: string }> = ({ userEmail }) => {
   const navigate = useNavigate();

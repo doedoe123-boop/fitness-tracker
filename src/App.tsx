@@ -29,6 +29,8 @@ import News from "./pages/HealthNews";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 import Workouts from "./pages/protected/Workouts";
+import { SidebarProvider } from './pages/components/SidebarProvider';
+import ProtectedLayout from './pages/protected/layouts/ProtectedLayout';
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -101,9 +103,9 @@ function App() {
           <Route
             element={
               <ProtectedRoute>
-                <div className="min-h-screen bg-slate-50 dark:bg-dark-primary text-slate-900 dark:text-slate-200">
-                  <Outlet />
-                </div>
+                <SidebarProvider>
+                  <ProtectedLayout />
+                </SidebarProvider>
               </ProtectedRoute>
             }
           >
@@ -120,7 +122,5 @@ function App() {
     </ThemeProvider>
   );
 }
-
-
 
 export default App;
