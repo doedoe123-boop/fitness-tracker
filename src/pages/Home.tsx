@@ -11,20 +11,20 @@ import Healthier from "../assets/hero/healthier.png";
 
 function Home() {
   const [showVideo, setShowVideo] = useState(false);
-  const [email, setEmail] = useState("");
-  const [subscriptionStatus, setSubscriptionStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+ // const [email, setEmail] = useState("");
+  //const [subscriptionStatus, setSubscriptionStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubscriptionStatus("loading");
+  // const handleSubscribe = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setSubscriptionStatus("loading");
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+  //   // Simulate API call
+  //   await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // For demo, always succeed
-    setSubscriptionStatus("success");
-    setEmail("");
-  };
+  //   // For demo, always succeed
+  //   setSubscriptionStatus("success");
+  //   setEmail("");
+  // };
 
   return (
     <div className="bg-white dark:bg-dark-primary text-slate-800 dark:text-slate-200">

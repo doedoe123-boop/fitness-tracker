@@ -190,11 +190,20 @@ const BodyExercise: React.FC<BodyExerciseProps> = ({ exercises, category }) => {
       {/* Selected Exercise Display */}
       {selectedExercise && (
         <motion.div
-          className="mt-16 text-center"
+          className="mt-16 text-center relative"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
+          {/* Back Button */}
+          <button
+            className="absolute left-0 top-0 md:left-4 md:top-4 bg-slate-100 dark:bg-dark-secondary text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg shadow hover:bg-slate-200 dark:hover:bg-dark-accent focus:outline-none focus:ring-2 focus:ring-teal-500 z-20"
+            onClick={() => setSelectedExercise(null)}
+            style={{ marginBottom: 16 }}
+          >
+            ← Back
+          </button>
+
           <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">
             Now Performing: <span className="bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">{selectedExercise}</span>
           </h3>
