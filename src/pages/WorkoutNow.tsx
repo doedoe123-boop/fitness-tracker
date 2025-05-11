@@ -65,7 +65,7 @@ const WorkoutNow: React.FC = () => {
         </motion.div>
 
         {/* Navigation Tabs */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-12 gap-4 flex-wrap">
           {[
             { id: 'workout', label: 'Workout', icon: <FaDumbbell /> },
             { id: 'history', label: 'History', icon: <FaHistory /> },

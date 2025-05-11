@@ -297,48 +297,43 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl font-bold mb-6">Join the Waitlist</h2>
+            <h2 className="text-4xl font-bold mb-6">Coming Soon to Fitnesses</h2>
             <p className="text-lg mb-12 max-w-2xl mx-auto text-slate-300">
-              Be the first to know when we launch new features and updates. 
-              Get exclusive early access and special offers.
+              We’re building tools to keep you motivated, consistent, and progressing.
+              Here’s what’s next:
             </p>
 
-            <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  required
-                />
-                <motion.button
-                  type="submit"
-                  className={`px-8 py-4 rounded-lg font-medium text-lg transition-all duration-300 ${
-                    subscriptionStatus === "loading"
-                      ? "bg-slate-700 cursor-wait"
-                      : subscriptionStatus === "success"
-                      ? "bg-emerald-600 hover:bg-emerald-700"
-                      : "bg-teal-600 hover:bg-teal-700"
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={subscriptionStatus === "loading"}
+            <div className="grid md:grid-cols-3 gap-8 text-left text-slate-200">
+              {[
+                {
+                  title: "AI Workout Planner",
+                  desc: "Get personalized workouts tailored to your goals and schedule."
+                },
+                {
+                  title: "Progress Tracker",
+                  desc: "Visually track your consistency, weight, and strength gains."
+                },
+                {
+                  title: "Community Challenges",
+                  desc: "Join monthly challenges and compete with friends or strangers."
+                }
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/5 rounded-xl p-6 border border-white/10"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
                 >
-                  {subscriptionStatus === "loading" ? (
-                    "Subscribing..."
-                  ) : subscriptionStatus === "success" ? (
-                    "✓ Subscribed!"
-                  ) : (
-                    "Join Waitlist"
-                  )}
-                </motion.button>
-              </div>
-            </form>
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-sm">{feature.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
+
 
       {/* Features Section */}
       <section className="py-24">

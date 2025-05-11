@@ -285,11 +285,11 @@ const Navigation = () => {
                   ))}
 
                   <Link
-                    to="/download"
+                    to="/login"
                     className="block w-full text-center px-6 py-4 rounded-lg text-white bg-brand-primary hover:bg-brand-primary-700 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Download App
+                    Login
                   </Link>
                 </div>
               </motion.div>
