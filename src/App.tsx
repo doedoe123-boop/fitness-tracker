@@ -31,6 +31,8 @@ import { Analytics } from "@vercel/analytics/react";
 import Workouts from "./pages/protected/Workouts";
 import { SidebarProvider } from './pages/components/SidebarProvider';
 import ProtectedLayout from './pages/protected/layouts/ProtectedLayout';
+import ExerciseDetails from './pages/protected/ExerciseDetails/page';
+import Profile from './pages/protected/Profile';
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -111,6 +113,8 @@ function App() {
           >
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/workouts" element={<Workouts />} />
+            <Route path="/workouts/:id" element={<ExerciseDetails />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
 
           {/* Not found */}

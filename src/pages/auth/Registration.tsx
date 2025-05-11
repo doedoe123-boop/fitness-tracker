@@ -58,22 +58,36 @@ const Registration: React.FC = () => {
   
     const { email, password, fullName } = formData;
   
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { full_name: fullName } // custom user meta
+    try {
+      // Sign up the user
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { full_name: fullName }
+        }
+      });
+    
+      if (authError) throw authError;
+
+      // Create initial profile entry
+      if (authData.user) {
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .upsert({
+            id: authData.user.id,
+            full_name: fullName,
+            goals_achieved: 0
+          });
+
+        if (profileError) throw profileError;
       }
-    });
-  
-    if (error) {
-      console.error('Signup error:', error.message);
-      alert(error.message);
-      return;
+    
+      navigate('/thank-you');
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert(error instanceof Error ? error.message : 'An error occurred during registration');
     }
-  
-    console.log('User created:', data);
-    navigate('/thank-you');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

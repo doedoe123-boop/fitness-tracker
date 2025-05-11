@@ -17,6 +17,7 @@ interface UseExercisesReturn {
   error: string | null;
   fetchByBodyPart: (bodyPart: string) => Promise<void>;
   fetchBodyParts: () => Promise<void>;
+  fetchById: (id: string) => Promise<Exercise | null>;
 }
 
 export const useExercises = (): UseExercisesReturn => {
@@ -58,6 +59,20 @@ export const useExercises = (): UseExercisesReturn => {
     setBodyParts(data);
   };
 
+  const fetchById = async (id: string): Promise<Exercise | null> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await fetchExercises('id', id);
+      return Array.isArray(data) ? data[0] : data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch exercise');
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Fetch all exercises on mount
   useEffect(() => {
     const fetchAllExercises = async () => {
@@ -75,6 +90,7 @@ export const useExercises = (): UseExercisesReturn => {
     error,
     fetchByBodyPart,
     fetchBodyParts,
+    fetchById,
   };
 };
 

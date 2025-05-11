@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import { FaSearch, FaFilter } from 'react-icons/fa';
 import DashboardNav from './layouts/ProtectedNav';
 import useExercises from '../../hooks/useExercises';
+import { useNavigate } from 'react-router-dom';
 
 const Workouts: React.FC = () => {
   const { exercises, bodyParts, loading, error, fetchByBodyPart, fetchBodyParts } = useExercises();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBodyPart, setSelectedBodyPart] = useState<string>('');
+  const navigate = useNavigate();
 
   // Fetch body parts on mount
   useEffect(() => {
@@ -85,10 +87,11 @@ const Workouts: React.FC = () => {
                   {filteredExercises.map((exercise) => (
                     <motion.div
                       key={exercise.id}
-                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col h-full"
+                      className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col h-full cursor-pointer"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       whileHover={{ y: -5 }}
+                      onClick={() => navigate(`/workouts/${exercise.id}`)}
                     >
                       {exercise.gifUrl && (
                         <div className="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-900">
