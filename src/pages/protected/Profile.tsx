@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaUserCircle, FaEnvelope, FaCalendar, FaWeight, FaRuler, FaTrophy, FaEdit } from 'react-icons/fa';
+import { FaUserCircle, FaEnvelope, FaCalendar, FaWeight, FaRuler, FaTrophy, FaEdit, FaCheck } from 'react-icons/fa';
 import { supabase } from '../../utils/supabaseClient';
 import DashboardNav from './layouts/ProtectedNav';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
+import ErrorState from '../components/ui/ErrorState';
+import toast from 'react-hot-toast';
 
 interface UserProfile {
   id: string;
@@ -17,38 +20,44 @@ interface UserProfile {
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+  const [saving, setSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<Partial<UserProfile>>({});
-  const [userEmail, setUserEmail] = useState<string>(''); // Changed to string with empty default
+  const [userEmail, setUserEmail] = useState<string>('');
 
   useEffect(() => {
     const getProfile = async () => {
       try {
+        setError('');
         const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         
         if (sessionError) throw sessionError;
         
         if (session?.user) {
-          setUserEmail(session.user.email || ''); // Handle undefined case
+          setUserEmail(session.user.email || '');
           const { data, error } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', session.user.id)
             .single();
 
-          if (error) throw error;
+          if (error && error.code !== 'PGRST116') { // PGRST116 = no rows returned
+            throw error;
+          }
           
-          setUser({
+          const profileData = {
             id: session.user.id,
             ...data
-          });
-          setFormData({
-            id: session.user.id,
-            ...data
-          });
+          };
+          
+          setUser(profileData);
+          setFormData(profileData);
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error fetching profile:', error);
+        setError(error.message || 'Failed to load profile');
+        toast.error('Failed to load profile');
       } finally {
         setLoading(false);
       }
@@ -61,34 +70,78 @@ const Profile: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: name === 'height' || name === 'weight' ? Number(value) || undefined : value
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSaving(true);
+    
     try {
       const { error } = await supabase
         .from('profiles')
         .upsert({
           id: user?.id,
-          ...formData
+          ...formData,
+          updated_at: new Date().toISOString()
         });
 
       if (error) throw error;
       
       setUser(prev => ({ ...prev!, ...formData }));
       setIsEditing(false);
-    } catch (error) {
+      toast.success('Profile updated successfully!');
+    } catch (error: any) {
       console.error('Error updating profile:', error);
+      toast.error(error.message || 'Failed to update profile');
+    } finally {
+      setSaving(false);
     }
+  };
+
+  const calculateAge = (birthdate: string) => {
+    const today = new Date();
+    const birth = new Date(birthdate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const calculateBMI = (weight?: number, height?: number) => {
+    if (!weight || !height) return null;
+    const heightInM = height / 100;
+    return (weight / (heightInM * heightInM)).toFixed(1);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="animate-pulse text-blue-600 dark:text-blue-400">Loading...</div>
-      </div>
+      <>
+        <DashboardNav userEmail={userEmail} />
+        <div className="p-4 md:p-8 max-w-4xl mx-auto">
+          <div className="flex items-center justify-center h-64">
+            <LoadingSpinner />
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (error && !user) {
+    return (
+      <>
+        <DashboardNav userEmail={userEmail} />
+        <div className="p-4 md:p-8 max-w-4xl mx-auto">
+          <ErrorState
+            title="Failed to load profile"
+            message={error}
+            onRetry={() => window.location.reload()}
+          />
+        </div>
+      </>
     );
   }
 
@@ -150,6 +203,8 @@ const Profile: React.FC = () => {
                       name="full_name"
                       value={formData.full_name || ''}
                       onChange={handleInputChange}
+                      placeholder="Enter your full name"
+                      aria-label="Full name"
                       className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     />
                   </div>
@@ -162,6 +217,7 @@ const Profile: React.FC = () => {
                       name="birthdate"
                       value={formData.birthdate || ''}
                       onChange={handleInputChange}
+                      aria-label="Birthdate"
                       className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     />
                   </div>
@@ -174,6 +230,10 @@ const Profile: React.FC = () => {
                       name="height"
                       value={formData.height || ''}
                       onChange={handleInputChange}
+                      placeholder="Enter height in cm"
+                      aria-label="Height in centimeters"
+                      min="50"
+                      max="300"
                       className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     />
                   </div>
@@ -186,6 +246,10 @@ const Profile: React.FC = () => {
                       name="weight"
                       value={formData.weight || ''}
                       onChange={handleInputChange}
+                      placeholder="Enter weight in kg"
+                      aria-label="Weight in kilograms"
+                      min="20"
+                      max="500"
                       className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                     />
                   </div>
@@ -193,12 +257,36 @@ const Profile: React.FC = () => {
                 
                 <div className="flex justify-end space-x-4">
                   <motion.button
-                    type="submit"
+                    type="button"
+                    onClick={() => {
+                      setIsEditing(false);
+                      setFormData(user || {});
+                    }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-2 rounded-lg bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors"
+                    className="px-6 py-2 rounded-lg bg-gray-500 hover:bg-gray-600 text-white transition-colors"
+                    disabled={saving}
                   >
-                    Save Changes
+                    Cancel
+                  </motion.button>
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: saving ? 1 : 1.05 }}
+                    whileTap={{ scale: saving ? 1 : 0.95 }}
+                    className="px-6 py-2 rounded-lg bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+                    disabled={saving}
+                  >
+                    {saving ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent" />
+                        <span>Saving...</span>
+                      </>
+                    ) : (
+                      <>
+                        <FaCheck />
+                        <span>Save Changes</span>
+                      </>
+                    )}
                   </motion.button>
                 </div>
               </form>
@@ -224,9 +312,9 @@ const Profile: React.FC = () => {
                 >
                   <FaCalendar className="text-xl text-green-600 dark:text-green-400" />
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Birthdate</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">Age</p>
                     <p className="font-medium text-gray-900 dark:text-white">
-                      {user?.birthdate ? new Date(user.birthdate).toLocaleDateString() : 'Not set'}
+                      {user?.birthdate ? `${calculateAge(user.birthdate)} years old` : 'Not set'}
                     </p>
                   </div>
                 </motion.div>
@@ -261,11 +349,29 @@ const Profile: React.FC = () => {
                   </div>
                 </motion.div>
 
+                {/* BMI Card */}
+                {user?.weight && user?.height && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center space-x-3 p-4 rounded-xl bg-teal-50 dark:bg-teal-900/20"
+                  >
+                    <div className="text-xl text-teal-600 dark:text-teal-400">⚖️</div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">BMI</p>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {calculateBMI(user.weight, user.height)}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="flex items-center space-x-3 p-4 rounded-xl bg-rose-50 dark:bg-rose-900/20 md:col-span-2"
+                  transition={{ delay: 0.5 }}
+                  className={`flex items-center space-x-3 p-4 rounded-xl bg-rose-50 dark:bg-rose-900/20 ${!user?.weight || !user?.height ? 'md:col-span-2' : ''}`}
                 >
                   <FaTrophy className="text-xl text-rose-600 dark:text-rose-400" />
                   <div>

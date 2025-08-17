@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { FaArrowLeft, FaDumbbell, FaRunning, FaUser } from 'react-icons/fa';
 import useExercises, { Exercise } from '../../../hooks/useExercises';
 import DashboardNav from '../layouts/ProtectedNav';
+import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import ErrorState from '../../components/ui/ErrorState';
 
 const ExerciseDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,25 +25,27 @@ const ExerciseDetails: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
+      <>
+        <DashboardNav userEmail="" />
+        <div className="p-4 md:p-8 max-w-4xl mx-auto">
+          <LoadingSpinner />
+        </div>
+      </>
     );
   }
 
   if (error || !exercise) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <p className="text-red-500 dark:text-red-400 mb-4">
-          {error || 'Exercise not found'}
-        </p>
-        <button
-          onClick={() => navigate('/workouts')}
-          className="text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Back to Workouts
-        </button>
-      </div>
+      <>
+        <DashboardNav userEmail="" />
+        <div className="p-4 md:p-8 max-w-4xl mx-auto">
+          <ErrorState
+            title="Exercise not found"
+            message={error || 'The exercise you are looking for does not exist.'}
+            onRetry={() => navigate('/workouts')}
+          />
+        </div>
+      </>
     );
   }
 

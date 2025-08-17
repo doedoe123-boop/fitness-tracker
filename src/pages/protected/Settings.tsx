@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaBell, FaCog } from 'react-icons/fa';
+import { FaBell, FaCog, FaLock, FaSignOutAlt, FaTrash } from 'react-icons/fa';
 import { useTheme } from '../components/ThemeProvider';
 import DashboardNav from './layouts/ProtectedNav';
 import { supabase } from '../../utils/supabaseClient';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
+import ErrorState from '../components/ui/ErrorState';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface UserSettings {
   workout_reminders: boolean;
@@ -14,6 +18,7 @@ interface UserSettings {
 
 const Settings: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
   const [settings, setSettings] = useState<UserSettings>({
     workout_reminders: true,
     email_notifications: true,
@@ -21,38 +26,45 @@ const Settings: React.FC = () => {
     language: 'en'
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+  const [userEmail, setUserEmail] = useState<string>('');
 
   useEffect(() => {
     const loadSettings = async () => {
       try {
+        setError('');
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
+          setUserEmail(session.user.email || '');
           const { data, error } = await supabase
             .from('user_settings')
             .select('*')
             .eq('user_id', session.user.id)
             .single();
 
-          if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned" error
+          if (error && error.code !== 'PGRST116') {
             throw error;
           }
 
           if (data) {
             setSettings(prev => ({
               ...prev,
-              ...data
+              ...data,
+              dark_mode: theme === 'dark'
             }));
           }
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error loading settings:', error);
+        setError(error.message || 'Failed to load settings');
+        toast.error('Failed to load settings');
       } finally {
         setLoading(false);
       }
     };
 
     loadSettings();
-  }, []);
+  }, [theme]);
 
   const handleSettingChange = async (key: keyof UserSettings, value: boolean | string) => {
     try {
@@ -77,21 +89,85 @@ const Settings: React.FC = () => {
         });
 
       if (error) throw error;
-    } catch (error) {
+      
+      toast.success('Setting updated successfully!');
+    } catch (error: any) {
       console.error('Error updating setting:', error);
+      toast.error(error.message || 'Failed to update setting');
+      
       // Revert the setting if update failed
       setSettings(prev => ({
         ...prev,
-        [key]: !value
+        [key]: typeof value === 'boolean' ? !value : prev[key]
       }));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      toast.success('Signed out successfully');
+      navigate('/login');
+    } catch (error: any) {
+      console.error('Error signing out:', error);
+      toast.error('Failed to sign out');
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user) throw new Error('No user session');
+
+      // Delete user data
+      await Promise.all([
+        supabase.from('profiles').delete().eq('id', session.user.id),
+        supabase.from('user_settings').delete().eq('user_id', session.user.id),
+        supabase.from('workout_history').delete().eq('user_id', session.user.id)
+      ]);
+
+      // Sign out
+      await supabase.auth.signOut();
+      
+      toast.success('Account deleted successfully');
+      navigate('/');
+    } catch (error: any) {
+      console.error('Error deleting account:', error);
+      toast.error('Failed to delete account');
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800">
-        <div className="animate-pulse text-blue-600 dark:text-blue-400">Loading...</div>
-      </div>
+      <>
+        <DashboardNav userEmail={userEmail} />
+        <div className="p-4 md:p-8 max-w-4xl mx-auto">
+          <div className="flex items-center justify-center h-64">
+            <LoadingSpinner />
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (error && !settings) {
+    return (
+      <>
+        <DashboardNav userEmail={userEmail} />
+        <div className="p-4 md:p-8 max-w-4xl mx-auto">
+          <ErrorState
+            title="Failed to load settings"
+            message={error}
+            onRetry={() => window.location.reload()}
+          />
+        </div>
+      </>
     );
   }
 
@@ -145,7 +221,7 @@ const Settings: React.FC = () => {
 
   return (
     <>
-      <DashboardNav />
+      <DashboardNav userEmail={userEmail} />
       <div className="p-4 md:p-8 max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -201,6 +277,7 @@ const Settings: React.FC = () => {
                           <select
                             value={setting.value}
                             onChange={(e) => handleSettingChange(setting.key as keyof UserSettings, e.target.value)}
+                            aria-label={setting.label}
                             className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-3 py-2"
                           >
                             {setting.options.map((option) => (
@@ -215,6 +292,58 @@ const Settings: React.FC = () => {
                   </div>
                 </div>
               ))}
+
+              {/* Account Management Section */}
+              <div>
+                <div className="flex items-center space-x-2 mb-4">
+                  <FaLock className="text-red-600 dark:text-red-400" />
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Account Management
+                  </h2>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50">
+                    <div>
+                      <h3 className="font-medium text-gray-900 dark:text-white">
+                        Sign Out
+                      </h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Sign out of your account on this device
+                      </p>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleSignOut}
+                      className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-600 hover:bg-gray-700 text-white transition-colors"
+                    >
+                      <FaSignOutAlt />
+                      <span>Sign Out</span>
+                    </motion.button>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                    <div>
+                      <h3 className="font-medium text-gray-900 dark:text-white">
+                        Delete Account
+                      </h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Permanently delete your account and all data
+                      </p>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleDeleteAccount}
+                      className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition-colors"
+                    >
+                      <FaTrash />
+                      <span>Delete Account</span>
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
