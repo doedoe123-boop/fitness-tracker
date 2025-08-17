@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaClock, FaPlay, FaPause, FaStop, FaRedo } from 'react-icons/fa';
+import { FaPlay, FaPause, FaStop, FaRedo } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 interface RestTimerProps {

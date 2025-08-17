@@ -241,7 +241,7 @@ export const ProgressAnalytics = ({ loading = false }: ProgressAnalyticsProps) =
             { name: '7-Day Streak', description: 'Workout for 7 consecutive days' },
             { name: 'Early Bird', description: 'Workout before 8 AM' },
             { name: 'Calorie Crusher', description: 'Burn 500+ calories in one session' }
-          ].map((achievement, index) => (
+          ].map((achievement) => (
             <div
               key={achievement.name}
               className="text-center p-4 bg-white/60 dark:bg-dark-secondary/60 rounded-lg"

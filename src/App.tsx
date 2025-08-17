@@ -5,7 +5,7 @@ import {
   useLocation,
   Outlet
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { ThemeProvider } from "./pages/components/ThemeProvider";
 import HealthImportance from "./pages/HealthImportance";
 import Footer from "./pages/components/layouts/Footer";
@@ -22,21 +22,24 @@ import NotFound from "./pages/NotFound";
 import FeatureHighlight from "./pages/components/FeatureHighlight";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
 import RedirectIfAuthenticated from "./pages/auth/RedirectIfAuthenticated";
-import Dashboard from "./pages/protected/Dashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsAndService";
 import News from "./pages/HealthNews";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
-import Workouts from "./pages/protected/Workouts";
 import { SidebarProvider } from './pages/components/SidebarProvider';
-import ProtectedLayout from './pages/protected/layouts/ProtectedLayout';
-import ExerciseDetails from './pages/protected/ExerciseDetails/page';
-import Profile from './pages/protected/Profile';
-import Settings from "./pages/protected/Settings";
-import History from "./pages/protected/History";
 import { Toaster } from 'react-hot-toast';
 import QuickActionsFAB from './pages/components/QuickActionsFAB';
+import LoadingSpinner from './pages/components/ui/LoadingSpinner';
+
+// Lazy load heavy components
+const Dashboard = lazy(() => import('./pages/protected/Dashboard'));
+const Workouts = lazy(() => import('./pages/protected/Workouts'));
+const ProtectedLayout = lazy(() => import('./pages/protected/layouts/ProtectedLayout'));
+const ExerciseDetails = lazy(() => import('./pages/protected/ExerciseDetails/page'));
+const Profile = lazy(() => import('./pages/protected/Profile'));
+const Settings = lazy(() => import("./pages/protected/Settings"));
+const History = lazy(() => import("./pages/protected/History"));
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -114,17 +117,19 @@ function App() {
             element={
               <ProtectedRoute>
                 <SidebarProvider>
-                  <ProtectedLayout />
+                  <Suspense fallback={<LoadingSpinner text="Loading dashboard..." />}>
+                    <ProtectedLayout />
+                  </Suspense>
                 </SidebarProvider>
               </ProtectedRoute>
             }
           >
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/workouts" element={<Workouts />} />
-            <Route path="/workouts/:id" element={<ExerciseDetails />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/dashboard" element={<Suspense fallback={<LoadingSpinner />}><Dashboard /></Suspense>} />
+            <Route path="/workouts" element={<Suspense fallback={<LoadingSpinner />}><Workouts /></Suspense>} />
+            <Route path="/workouts/:id" element={<Suspense fallback={<LoadingSpinner />}><ExerciseDetails /></Suspense>} />
+            <Route path="/history" element={<Suspense fallback={<LoadingSpinner />}><History /></Suspense>} />
+            <Route path="/profile" element={<Suspense fallback={<LoadingSpinner />}><Profile /></Suspense>} />
+            <Route path="/settings" element={<Suspense fallback={<LoadingSpinner />}><Settings /></Suspense>} />
           </Route>
 
           {/* Not found */}
