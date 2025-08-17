@@ -1,8 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { FaHeartbeat, FaDumbbell, FaAppleAlt, FaBrain } from "react-icons/fa";
+import { FaHeartbeat, FaDumbbell, FaAppleAlt, FaBrain, FaSearch } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from '../ThemeToggle';
+import SearchBar from '../SearchBar';
 
 interface NavItem {
   path?: string;
@@ -19,6 +20,7 @@ const Navigation = () => {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Add new state for updates badge
   const [hasNewUpdates] = useState(true);
@@ -157,8 +159,25 @@ const Navigation = () => {
               )
             ))}
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
+            {/* Theme Toggle and Search */}
+            <div className="flex items-center space-x-3">
+              {/* Search Button */}
+              <motion.button
+                onClick={() => setIsSearchOpen(true)}
+                className={`p-2 rounded-lg transition-colors ${
+                  scrolled 
+                    ? 'text-slate-600 dark:text-slate-300 hover:text-brand-primary dark:hover:text-brand-primary hover:bg-slate-100 dark:hover:bg-dark-accent' 
+                    : 'text-slate-900 dark:text-white hover:text-brand-primary dark:hover:text-brand-primary hover:bg-white/10'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Search"
+              >
+                <FaSearch className="w-4 h-4" />
+              </motion.button>
+              
+              <ThemeToggle />
+            </div>
 
             {/* Enhanced CTA Button with pulse effect */}
             <Link
@@ -297,6 +316,9 @@ const Navigation = () => {
           </AnimatePresence>
         </div>
       </div>
+      
+      {/* Search Bar Component */}
+      <SearchBar isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </nav>
   );
 };

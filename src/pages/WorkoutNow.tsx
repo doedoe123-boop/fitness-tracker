@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaClock, FaFire, FaChartLine, FaHistory, FaTrophy, FaDumbbell } from 'react-icons/fa';
+import { FaClock, FaFire, FaChartLine, FaHistory, FaTrophy, FaDumbbell, FaStopwatch } from 'react-icons/fa';
 import WorkoutHistory from './components/WorkoutHistory';
 import type { WorkoutSession } from './components/WorkoutHistory';
 import BodyExercise from './components/BodyExercise';
 import { exerciseCategories } from './data/exercises';
 import FitnessGoals from './components/FitnessGoals';
+import RestTimer from './components/RestTimer';
+import toast from 'react-hot-toast';
 
 interface ExerciseCategory {
   category: string;
@@ -18,6 +20,7 @@ const WorkoutNow: React.FC = () => {
   const [workoutStartTime, setWorkoutStartTime] = useState<Date | null>(null);
   const [caloriesBurned, setCaloriesBurned] = useState<number>(0);
   const [workoutDuration, setWorkoutDuration] = useState<number>(0);
+  const [isRestTimerOpen, setIsRestTimerOpen] = useState<boolean>(false);
   const [workoutHistory, setWorkoutHistory] = useState<WorkoutSession[]>(() => {
     const saved = localStorage.getItem('workoutHistory');
     return saved ? JSON.parse(saved) : [];
@@ -168,10 +171,24 @@ const WorkoutNow: React.FC = () => {
 
               {/* Workout Controls */}
               <motion.div
-                className="fixed bottom-8 right-8"
+                className="fixed bottom-8 right-8 flex flex-col space-y-4"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
               >
+                {/* Rest Timer Button */}
+                {workoutStartTime && (
+                  <motion.button
+                    onClick={() => setIsRestTimerOpen(true)}
+                    className="p-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full shadow-lg"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Rest Timer"
+                  >
+                    <FaStopwatch className="w-5 h-5" />
+                  </motion.button>
+                )}
+
+                {/* Start/End Workout Button */}
                 <motion.button
                   onClick={() => {
                     if (workoutStartTime) {
@@ -187,8 +204,28 @@ const WorkoutNow: React.FC = () => {
                       setWorkoutHistory(updatedHistory);
                       localStorage.setItem('workoutHistory', JSON.stringify(updatedHistory));
                       setWorkoutStartTime(null);
+                      
+                      // Success toast notification
+                      toast.success(`Workout completed! 🎉\n${formatTime(workoutDuration)} • ${caloriesBurned} calories burned`, {
+                        duration: 5000,
+                        style: {
+                          borderRadius: '10px',
+                          background: '#10b981',
+                          color: '#fff',
+                        },
+                      });
                     } else {
                       setWorkoutStartTime(new Date());
+                      
+                      // Start workout toast
+                      toast.success('Workout started! Keep it up! 💪', {
+                        duration: 3000,
+                        style: {
+                          borderRadius: '10px',
+                          background: '#059669',
+                          color: '#fff',
+                        },
+                      });
                     }
                   }}
                   className={`px-8 py-4 rounded-full font-medium text-white shadow-lg ${
@@ -227,6 +264,12 @@ const WorkoutNow: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
+        
+        {/* Rest Timer Component */}
+        <RestTimer 
+          isVisible={isRestTimerOpen} 
+          onClose={() => setIsRestTimerOpen(false)} 
+        />
       </div>
     </div>
   );

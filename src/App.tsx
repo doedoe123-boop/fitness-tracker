@@ -35,6 +35,8 @@ import ExerciseDetails from './pages/protected/ExerciseDetails/page';
 import Profile from './pages/protected/Profile';
 import Settings from "./pages/protected/Settings";
 import History from "./pages/protected/History";
+import { Toaster } from 'react-hot-toast';
+import QuickActionsFAB from './pages/components/QuickActionsFAB';
 
 // Component to manage the dynamic page title
 function DynamicTitle() {
@@ -88,6 +90,7 @@ function App() {
                   </main>
                   <FeatureHighlight />
                   <Footer />
+                  <QuickActionsFAB />
                 </div>
               </RedirectIfAuthenticated>
             }
@@ -130,6 +133,29 @@ function App() {
       </Router>
       <Analytics />
       <SpeedInsights />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: 'var(--toast-bg)',
+            color: 'var(--toast-color)',
+            border: '1px solid var(--toast-border)',
+          },
+          success: {
+            iconTheme: {
+              primary: '#10b981',
+              secondary: '#ffffff',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#ffffff',
+            },
+          },
+        }}
+      />
     </ThemeProvider>
   );
 }

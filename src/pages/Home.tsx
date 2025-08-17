@@ -2,6 +2,7 @@ import { FaAppleAlt, FaDumbbell, FaClipboardList, FaUsers, FaHeartbeat, FaLeaf, 
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Testimonials from './components/Testimonials';
+import { StatsGrid } from './components/ui/AnimatedCounter';
 import Testimonial1 from "../assets/testimonial/1.jpg";
 import Testimonial2 from "../assets/testimonial/2.jpg";
 import Running from "../assets/exercises/running.gif";
@@ -59,14 +60,14 @@ function Home() {
             Achieve your fitness goals with personalized workouts, nutrition tracking, and expert guidance. Join thousands of users who have transformed their lives with our comprehensive fitness platform.
           </p>
           
-          <ul className="grid grid-cols-2 gap-4 mb-8">
+          <div className="grid grid-cols-2 gap-4 mb-8">
             {[
               "AI-Powered Workout Plans",
               "Real-Time Progress Tracking",
               "Nutrition & Diet Guidance",
               "Expert Health Tips"
             ].map((feature, index) => (
-              <motion.li
+              <motion.div
                 key={index}
                 className="flex items-center space-x-2 text-slate-700 dark:text-slate-300"
                 initial={{ opacity: 0, x: -20 }}
@@ -75,9 +76,9 @@ function Home() {
               >
                 <FaCheckCircle className="text-teal-600 dark:text-teal-500 flex-shrink-0" />
                 <span>{feature}</span>
-              </motion.li>
+              </motion.div>
             ))}
-          </ul>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4">
             <motion.a
@@ -143,10 +144,31 @@ function Home() {
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                title="Fitness App Demo Video"
               />
             </motion.div>
           </motion.div>
         )}
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-white dark:from-dark-secondary dark:to-dark-primary">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Trusted by Fitness Enthusiasts Worldwide
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-300">
+              Join thousands of users who have achieved their fitness goals
+            </p>
+          </motion.div>
+          <StatsGrid />
+        </div>
       </section>
 
       {/* What's New Section */}
